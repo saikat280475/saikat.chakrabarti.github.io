@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saikat Chakrabarti — IIT Kanpur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0f1c2e;
+    --navy-mid: #1a2e47;
+    --accent: #c8a96e;
+    --accent-light: #e8d5aa;
+    --white: #fafaf8;
+    --off-white: #f2f0eb;
+    --text-dark: #1a1a1a;
+    --text-mid: #4a4a4a;
+    --text-muted: #7a7a7a;
+    --border: rgba(0,0,0,0.1);
+    --font-serif: 'Lora', Georgia, serif;
+    --font-sans: 'Source Sans 3', system-ui, sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); background: var(--white); color: var(--text-dark); line-height: 1.7; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(250,250,248,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%; height: 60px;
+  }
+  .nav-logo { font-family: var(--font-serif); font-size: 1rem; font-weight: 600; color: var(--navy); text-decoration: none; letter-spacing: 0.02em; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.82rem; color: var(--text-mid); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-toggle { display: none; background: none; border: none; cursor: pointer; font-size: 1.4rem; color: var(--navy); }
+
+  .hero { background: var(--navy); color: var(--white); display: grid; grid-template-columns: 1fr 1fr; min-height: 88vh; }
+  .hero-left { padding: 80px 6% 80px 8%; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid rgba(255,255,255,0.08); }
+  .hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; font-weight: 600; }
+  .hero-name { font-family: var(--font-serif); font-size: clamp(2.4rem, 4vw, 3.8rem); font-weight: 600; line-height: 1.1; margin-bottom: 1.2rem; color: var(--white); }
+  .hero-title { font-size: 1rem; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 0.4rem; }
+  .hero-affil { font-size: 0.9rem; color: rgba(255,255,255,0.4); margin-bottom: 2rem; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.4rem; }
+  .badge { font-size: 0.72rem; padding: 4px 14px; border: 1px solid rgba(200,169,110,0.5); border-radius: 100px; color: var(--accent); letter-spacing: 0.04em; font-weight: 600; }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn { display: inline-block; font-size: 0.82rem; padding: 11px 26px; border-radius: 4px; text-decoration: none; font-weight: 600; letter-spacing: 0.04em; transition: all 0.2s; cursor: pointer; border: none; }
+  .btn-primary { background: var(--accent); color: var(--navy); }
+  .btn-primary:hover { background: var(--accent-light); }
+  .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.3); }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-dark { background: var(--navy); color: var(--white); border: 1px solid var(--navy); }
+  .btn-dark:hover { background: var(--navy-mid); }
+
+  .hero-right { padding: 80px 8% 80px 6%; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 2rem; }
+  .photo-wrap { width: 220px; height: 265px; border-radius: 8px; overflow: hidden; border: 3px solid rgba(200,169,110,0.35); flex-shrink: 0; }
+  .photo-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+  .hero-contact { width: 100%; }
+  .hero-contact h3 { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; font-weight: 600; }
+  .contact-list { list-style: none; }
+  .contact-list li { display: flex; gap: 1rem; font-size: 0.88rem; padding: 0.55rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); color: rgba(255,255,255,0.7); }
+  .contact-list li:last-child { border-bottom: none; }
+  .contact-label { color: rgba(255,255,255,0.35); min-width: 60px; font-size: 0.78rem; letter-spacing: 0.04em; padding-top: 1px; flex-shrink: 0; }
+  .contact-list a { color: var(--accent-light); text-decoration: none; }
+  .contact-list a:hover { color: var(--accent); }
+
+  .metrics { background: var(--navy-mid); display: flex; justify-content: center; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.06); }
+  .metric { flex: 1; min-width: 140px; padding: 28px 2%; text-align: center; border-right: 1px solid rgba(255,255,255,0.06); }
+  .metric:last-child { border-right: none; }
+  .metric-num { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 600; color: var(--accent); display: block; }
+  .metric-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 4px; display: block; }
+
+  section { padding: 80px 8%; }
+  .section-label { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 1.2rem; }
+  .section-title { font-family: var(--font-serif); font-size: clamp(1.6rem, 2.5vw, 2.2rem); color: var(--navy); margin-bottom: 2.4rem; line-height: 1.25; font-weight: 600; }
+  .divider { height: 1px; background: var(--border); margin: 0 8%; }
+
+  .research-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+  .research-card { border: 1px solid var(--border); border-radius: 8px; padding: 1.8rem; background: var(--off-white); transition: border-color 0.2s, transform 0.2s; }
+  .research-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .research-icon { font-size: 1.6rem; margin-bottom: 1rem; display: block; }
+  .research-card h3 { font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.6rem; }
+  .research-card p { font-size: 0.88rem; color: var(--text-mid); line-height: 1.65; }
+
+  .bio-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 4rem; align-items: start; }
+  .bio-text p { font-size: 1rem; color: var(--text-mid); line-height: 1.85; margin-bottom: 1.2rem; }
+  .bio-text p:last-child { margin-bottom: 0; }
+  .timeline { list-style: none; }
+  .timeline li { display: flex; gap: 1rem; padding: 0.9rem 0; border-bottom: 1px solid var(--border); font-size: 0.88rem; }
+  .timeline li:last-child { border-bottom: none; }
+  .tl-year { color: var(--accent); font-weight: 700; min-width: 56px; font-size: 0.78rem; padding-top: 2px; flex-shrink: 0; }
+  .tl-content { color: var(--text-mid); line-height: 1.55; }
+  .tl-content strong { color: var(--text-dark); font-weight: 600; }
+
+  .pub-section { background: var(--off-white); }
+  .pub-tabs { display: flex; gap: 0; margin-bottom: 2rem; border-bottom: 2px solid var(--border); }
+  .pub-tab { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.05em; padding: 0.6rem 1.4rem; cursor: pointer; color: var(--text-muted); border-bottom: 2px solid transparent; margin-bottom: -2px; background: none; border-top: none; border-left: none; border-right: none; transition: color 0.2s; }
+  .pub-tab.active { color: var(--navy); border-bottom-color: var(--accent); }
+  .pub-list { list-style: none; }
+  .pub-item { padding: 1.4rem 0; border-bottom: 1px solid var(--border); display: flex; gap: 1.4rem; align-items: flex-start; }
+  .pub-item:last-child { border-bottom: none; }
+  .pub-year-badge { background: var(--navy); color: var(--accent); font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 4px; min-width: 48px; text-align: center; flex-shrink: 0; margin-top: 3px; letter-spacing: 0.04em; }
+  .pub-details h4 { font-size: 0.95rem; font-weight: 600; color: var(--navy); margin-bottom: 0.3rem; line-height: 1.4; }
+  .pub-details p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+  .pub-details .pub-venue { color: var(--text-mid); font-style: italic; }
+  .pub-more { margin-top: 1.8rem; }
+
+  .news-list { list-style: none; }
+  .news-item { display: flex; gap: 2rem; padding: 1.2rem 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+  .news-item:last-child { border-bottom: none; }
+  .news-date { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); min-width: 80px; padding-top: 3px; letter-spacing: 0.05em; flex-shrink: 0; }
+  .news-content { font-size: 0.92rem; color: var(--text-mid); line-height: 1.6; }
+  .news-content strong { color: var(--text-dark); }
+  .news-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; padding: 2px 8px; border-radius: 100px; margin-left: 0.5rem; text-transform: uppercase; vertical-align: middle; }
+  .tag-new { background: #e8f5e9; color: #2e7d32; }
+  .tag-book { background: #e3f2fd; color: #1565c0; }
+  .tag-award { background: #fff8e1; color: #e65100; }
+
+  footer { background: var(--navy); color: rgba(255,255,255,0.4); padding: 40px 8%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem; }
+  footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+  .footer-logo { font-family: var(--font-serif); color: rgba(255,255,255,0.7); font-size: 1rem; }
+
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 56px 6% 36px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .hero-right { padding: 36px 6% 56px; flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
+    .photo-wrap { width: 130px; height: 158px; }
+    .bio-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .nav-links { display: none; position: absolute; top: 60px; left: 0; right: 0; background: var(--white); padding: 1.5rem 8%; border-bottom: 1px solid var(--border); flex-direction: column; gap: 1rem; }
+    .nav-links.open { display: flex; }
+    .nav-toggle { display: block; }
+    section { padding: 56px 6%; }
+    .divider { margin: 0 6%; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Saikat Chakrabarti</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#research">Research</a></li>
+    <li><a href="#bio">About</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Toggle menu">☰</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">IIT Kanpur · Electrical Engineering</p>
+    <h1 class="hero-name">Saikat<br>Chakrabarti</h1>
+    <p class="hero-title">Chair Professor &amp; Ministry of Skill Development Chair</p>
+    <p class="hero-affil">Department of Electrical Engineering, IIT Kanpur 208016, India</p>
+    <div class="hero-badges">
+      <span class="badge">IEEE Fellow</span>
+      <span class="badge">INAE Fellow</span>
+      <span class="badge">IE Fellow</span>
+    </div>
+    <div class="hero-cta">
+      <a href="mailto:saikatc@iitk.ac.in" class="btn btn-primary">Get in Touch</a>
+      <a href="https://scholar.google.co.in/citations?user=XrUg8HwAAAAJ&hl=en" target="_blank" class="btn btn-outline">Google Scholar →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="photo-wrap">
+      <img src="SC_pic.jpg" alt="Professor Saikat Chakrabarti">
+    </div>
+    <div class="hero-contact" id="contact">
+      <h3>Contact</h3>
+      <ul class="contact-list">
+        <li><span class="contact-label">Email</span><a href="mailto:saikatc@iitk.ac.in">saikatc@iitk.ac.in</a></li>
+        <li><span class="contact-label">Alt</span><a href="mailto:saikat.chakrabarti@gmail.com">saikat.chakrabarti@gmail.com</a></li>
+        <li><span class="contact-label">Phone</span>+91-512-259-6598</li>
+        <li><span class="contact-label">Fax</span>+91-512-259-0063</li>
+        <li><span class="contact-label">ORCID</span><a href="https://orcid.org/0000-0003-2224-4308" target="_blank">0000-0003-2224-4308</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- METRICS -->
+<div class="metrics">
+  <div class="metric"><span class="metric-num">7,800+</span><span class="metric-label">Citations</span></div>
+  <div class="metric"><span class="metric-num">33</span><span class="metric-label">H-Index</span></div>
+  <div class="metric"><span class="metric-num">236</span><span class="metric-label">Publications</span></div>
+  <div class="metric"><span class="metric-num">15+</span><span class="metric-label">Years at IIT Kanpur</span></div>
+  <div class="metric"><span class="metric-num">3</span><span class="metric-label">Fellow Distinctions</span></div>
+</div>
+
+<!-- RESEARCH -->
+<section id="research">
+  <p class="section-label">Areas of Expertise</p>
+  <h2 class="section-title">Research</h2>
+  <div class="research-grid">
+    <div class="research-card">
+      <span class="research-icon">⚡</span>
+      <h3>Power System State Estimation</h3>
+      <p>WLS and hybrid state estimation, PMU integration, observability analysis, bad data detection, PMU placement using ILP and greedy algorithms.</p>
+    </div>
+    <div class="research-card">
+      <span class="research-icon">🛰️</span>
+      <h3>Synchrophasor Technology</h3>
+      <p>Phasor measurement units (PMUs), synchronized measurement systems, uncertainty quantification, WAMS for monitoring and protection.</p>
+    </div>
+    <div class="research-card">
+      <span class="research-icon">🔌</span>
+      <h3>Smart Transmission &amp; Distribution</h3>
+      <p>Monitoring, control, and protection of smart grid systems. Stability and control with high penetration of renewable energy sources.</p>
+    </div>
+    <div class="research-card">
+      <span class="research-icon">🔋</span>
+      <h3>Microgrids</h3>
+      <p>Operation, control, and energy management of microgrids. Distributed generation integration and droop-based control strategies.</p>
+    </div>
+    <div class="research-card">
+      <span class="research-icon">🌐</span>
+      <h3>Distribution System Analysis</h3>
+      <p>Distribution system state estimation, planning and operation of distribution networks, coordinated transmission–distribution estimation.</p>
+    </div>
+    <div class="research-card">
+      <span class="research-icon">📊</span>
+      <h3>Power System Modelling</h3>
+      <p>Generator and load modelling, voltage stability analysis, static load modelling, voltage stability indices.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BIO -->
+<section id="bio">
+  <p class="section-label">Biography</p>
+  <h2 class="section-title">About</h2>
+  <div class="bio-grid">
+    <div class="bio-text">
+      <p>Prof. Saikat Chakrabarti completed his PhD in Electrical Engineering from the Memorial University of Newfoundland, Canada, in 2006. Prior to his doctoral studies, he worked at Asea Brown Boveri (ABB) Limited, India and at the Bhabha Atomic Research Centre (BARC), India.</p>
+      <p>Following his PhD, he served as a Special Scientist at the University of Cyprus, and subsequently as a Research Associate and then Lecturer at the Queensland University of Technology, Brisbane, Australia.</p>
+      <p>Since 2009, he has been with the Department of Electrical Engineering at IIT Kanpur, where he has held the position of Chair Professor since 2018. He was appointed to the Ministry of Skill Development and Entrepreneurship Chair. From July 2023, he served as Chair Professor and Director of the Emera and NB Power Research Centre for Smart Grid Technologies at the University of New Brunswick, Fredericton, Canada.</p>
+      <p>His research focuses on the monitoring, control, and protection of smart transmission and distribution systems and microgrids. He is the author of over 236 publications including journal papers, conference papers, and books, with over 7,800 citations and an h-index of 33.</p>
+    </div>
+    <div>
+      <p class="section-label" style="margin-bottom:1rem;">Academic Timeline</p>
+      <ul class="timeline">
+        <li><span class="tl-year">2023–</span><div class="tl-content"><strong>Chair Prof. &amp; Director</strong>, Emera &amp; NB Power Research Centre, Univ. of New Brunswick, Canada</div></li>
+        <li><span class="tl-year">2018–</span><div class="tl-content"><strong>Chair Professor</strong>, Dept. of EE, IIT Kanpur, India</div></li>
+        <li><span class="tl-year">2009–</span><div class="tl-content"><strong>Faculty</strong>, Dept. of EE, IIT Kanpur (joined as Assistant Professor)</div></li>
+        <li><span class="tl-year">2009</span><div class="tl-content"><strong>Lecturer</strong>, Queensland Univ. of Technology, Brisbane, Australia</div></li>
+        <li><span class="tl-year">2008</span><div class="tl-content"><strong>Research Associate</strong>, Queensland Univ. of Technology, Australia</div></li>
+        <li><span class="tl-year">2006</span><div class="tl-content"><strong>Special Scientist</strong>, University of Cyprus, Cyprus</div></li>
+        <li><span class="tl-year">2006</span><div class="tl-content"><strong>PhD</strong>, Electrical Engineering, Memorial Univ. of Newfoundland, Canada</div></li>
+        <li><span class="tl-year">Pre-PhD</span><div class="tl-content"><strong>ABB Limited</strong> &amp; <strong>BARC</strong>, India</div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PUBLICATIONS -->
+<section id="publications" class="pub-section">
+  <p class="section-label">Scholarly Work</p>
+  <h2 class="section-title">Selected Publications</h2>
+  <div class="pub-tabs">
+    <button class="pub-tab active" onclick="showTab('journals', this)">Journal Papers</button>
+    <button class="pub-tab" onclick="showTab('books', this)">Books</button>
+  </div>
+  <ul class="pub-list" id="journals">
+    <li class="pub-item">
+      <span class="pub-year-badge">2017</span>
+      <div class="pub-details">
+        <h4>Distribution system state estimation incorporating correlated input uncertainties</h4>
+        <p class="pub-venue">International Journal of Electrical Power and Energy Systems, Vol. 87, pp. 43–51</p>
+        <p>S. M. Ashraf, A. Gupta, D. Choudhary, S. Chakrabarti</p>
+      </div>
+    </li>
+    <li class="pub-item">
+      <span class="pub-year-badge">2016</span>
+      <div class="pub-details">
+        <h4>Comparative study of methods of inclusion of PMU current phasor measurements in a hybrid state estimator</h4>
+        <p class="pub-venue">IEEE Systems Journal, Vol. 10, No. 1, pp. 69–77</p>
+        <p>S. K. Mallik, S. Chakrabarti, S. N. Singh</p>
+      </div>
+    </li>
+    <li class="pub-item">
+      <span class="pub-year-badge">2015</span>
+      <div class="pub-details">
+        <h4>On the estimation of network-parameter uncertainty for power system state estimation</h4>
+        <p class="pub-venue">IEEE Transactions on Power Systems, Vol. 31, No. 2, pp. 1661–1662</p>
+        <p>M. Asprou, S. Chakrabarti, E. Kyriakides</p>
+      </div>
+    </li>
+    <li class="pub-item">
+      <span class="pub-year-badge">2010</span>
+      <div class="pub-details">
+        <h4>Droop control of converter-interfaced microsources in rural distributed generation</h4>
+        <p class="pub-venue">IEEE Transactions on Power Delivery</p>
+        <p>R. Majumder, G. Ledwich, A. Ghosh, S. Chakrabarti, F. Zare</p>
+      </div>
+    </li>
+    <li class="pub-item">
+      <span class="pub-year-badge">2009</span>
+      <div class="pub-details">
+        <h4>Uncertainty in power system state variables obtained through synchronized measurements</h4>
+        <p class="pub-venue">IEEE Transactions on Instrumentation and Measurement, Vol. 58, No. 8, pp. 2452–2458</p>
+        <p>S. Chakrabarti, E. Kyriakides, M. Albu</p>
+      </div>
+    </li>
+    <li class="pub-item">
+      <span class="pub-year-badge">2009</span>
+      <div class="pub-details">
+        <h4>PMU measurement uncertainty considerations in WLS state estimation</h4>
+        <p class="pub-venue">IEEE Transactions on Power Systems</p>
+        <p>S. Chakrabarti, E. Kyriakides</p>
+      </div>
+    </li>
+    <li class="pub-item">
+      <span class="pub-year-badge">2007</span>
+      <div class="pub-details">
+        <h4>Electric power system state estimation with phasor measurements</h4>
+        <p class="pub-venue">Electric Power Systems Research, Vol. 77, Issue 7, pp. 780–787</p>
+        <p>V. Patel, S. Chakrabarti, S. N. Singh</p>
+      </div>
+    </li>
+  </ul>
+  <ul class="pub-list" id="books" style="display:none;">
+    <li class="pub-item">
+      <span class="pub-year-badge">2025</span>
+      <div class="pub-details">
+        <h4>Power System State Estimation — Theory, Algorithms, and Practice</h4>
+        <p class="pub-venue">IEEE Press / Wiley <em>(In preparation)</em></p>
+        <p>S. Chakrabarti</p>
+      </div>
+    </li>
+    <li class="pub-item">
+      <span class="pub-year-badge">2016</span>
+      <div class="pub-details">
+        <h4>Synchronized Phasor Measurements for Smart Grids</h4>
+        <p class="pub-venue">IET Power and Energy Series, ISBN: 978-1-78561-011-0</p>
+        <p>S. K. Mallik, S. Chakrabarti, S. N. Singh</p>
+      </div>
+    </li>
+    <li class="pub-item">
+      <span class="pub-year-badge">2008</span>
+      <div class="pub-details">
+        <h4>Power System State Estimation</h4>
+        <p class="pub-venue">VDM Verlag, Saarbrücken, Germany</p>
+        <p>S. Chakrabarti</p>
+      </div>
+    </li>
+  </ul>
+  <div class="pub-more">
+    <a href="https://scholar.google.co.in/citations?user=XrUg8HwAAAAJ&hl=en" target="_blank" class="btn btn-dark">View all 236 publications on Google Scholar →</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- NEWS -->
+<section id="news">
+  <p class="section-label">Updates</p>
+  <h2 class="section-title">News &amp; Announcements</h2>
+  <ul class="news-list">
+    <li class="news-item">
+      <span class="news-date">2025</span>
+      <div class="news-content"><strong>Textbook in preparation:</strong> <em>Power System State Estimation — Theory, Algorithms, and Practice</em> (IEEE Press / Wiley). <span class="news-tag tag-book">Book</span></div>
+    </li>
+    <li class="news-item">
+      <span class="news-date">2023–24</span>
+      <div class="news-content">Served as <strong>Chair Professor and Director</strong>, Emera &amp; NB Power Research Centre for Smart Grid Technologies, University of New Brunswick, Canada.</div>
+    </li>
+    <li class="news-item">
+      <span class="news-date">2018</span>
+      <div class="news-content">Appointed to <strong>Ministry of Skill Development and Entrepreneurship Chair</strong> at IIT Kanpur. <span class="news-tag tag-award">Chair</span></div>
+    </li>
+    <li class="news-item">
+      <span class="news-date">Ongoing</span>
+      <div class="news-content"><strong>PhD positions available</strong> in power system monitoring, state estimation, and smart grid technologies. Motivated candidates are encouraged to reach out directly. <span class="news-tag tag-new">Open</span></div>
+    </li>
+  </ul>
+</section>
+
+<footer>
+  <span class="footer-logo">Saikat Chakrabarti</span>
+  <span>Department of Electrical Engineering · IIT Kanpur 208016 · India</span>
+  <span>© 2025 · <a href="mailto:saikatc@iitk.ac.in">saikatc@iitk.ac.in</a></span>
+</footer>
+
+<script>
+  function showTab(tab, el) {
+    document.getElementById('journals').style.display = tab === 'journals' ? 'block' : 'none';
+    document.getElementById('books').style.display = tab === 'books' ? 'block' : 'none';
+    document.querySelectorAll('.pub-tab').forEach(function(t){ t.classList.remove('active'); });
+    el.classList.add('active');
+  }
+</script>
+</body>
+</html>
