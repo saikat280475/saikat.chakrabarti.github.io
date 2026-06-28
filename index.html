@@ -7,137 +7,171 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --navy: #0f1c2e;
-    --navy-mid: #1a2e47;
-    --accent: #c8a96e;h
-    --accent-light: #e8d5aa;
-    --white: #fafaf8;h
-    --off-white: #f2f0eb;
-    --text-dark: #1a1a1a;
-    --text-mid: #4a4a4a;
-    --text-muted: #7a7a7a;
-    --border: rgba(0,0,0,0.1);
-    --font-serif: 'Lora', Georgia, serif;
-    --font-sans: 'Source Sans 3', system-ui, sans-serif;
-  }
-  html { scroll-behavior: smooth; }
-  body { font-family: var(--font-sans); background: var(--white); color: var(--text-dark); line-height: 1.7; }
-
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(250,250,248,0.96);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 5%; height: 60px;
-  }
-  .nav-logo { font-family: var(--font-serif); font-size: 1rem; font-weight: 600; color: var(--navy); text-decoration: none; letter-spacing: 0.02em; }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a { font-size: 0.82rem; color: var(--text-mid); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--navy); }
-  .nav-toggle { display: none; background: none; border: none; cursor: pointer; font-size: 1.4rem; color: var(--navy); }
-
-  .hero { background: var(--navy); color: var(--white); display: grid; grid-template-columns: 1fr 1fr; min-height: 88vh; }
-  .hero-left { padding: 80px 6% 80px 8%; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid rgba(255,255,255,0.08); }
-  .hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; font-weight: 600; }
-  .hero-name { font-family: var(--font-serif); font-size: clamp(2.4rem, 4vw, 3.8rem); font-weight: 600; line-height: 1.1; margin-bottom: 1.2rem; color: var(--white); }
-  .hero-title { font-size: 1rem; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 0.4rem; }
-  .hero-affil { font-size: 0.9rem; color: rgba(255,255,255,0.4); margin-bottom: 2rem; }
-  .hero-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.4rem; }
-  .badge { font-size: 0.72rem; padding: 4px 14px; border: 1px solid rgba(200,169,110,0.5); border-radius: 100px; color: var(--accent); letter-spacing: 0.04em; font-weight: 600; }
-  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn { display: inline-block; font-size: 0.82rem; padding: 11px 26px; border-radius: 4px; text-decoration: none; font-weight: 600; letter-spacing: 0.04em; transition: all 0.2s; cursor: pointer; border: none; }
-  .btn-primary { background: var(--accent); color: var(--navy); }
-  .btn-primary:hover { background: var(--accent-light); }
-  .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.3); }
-  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-  .btn-dark { background: var(--navy); color: var(--white); border: 1px solid var(--navy); }
-  .btn-dark:hover { background: var(--navy-mid); }
-
-  .hero-right { padding: 80px 8% 80px 6%; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 2rem; }
-  .photo-wrap { width: 220px; height: 265px; border-radius: 8px; overflow: hidden; border: 3px solid rgba(200,169,110,0.35); flex-shrink: 0; }
-  .photo-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
-  .hero-contact { width: 100%; }
-  .hero-contact h3 { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; font-weight: 600; }
-  .contact-list { list-style: none; }
-  .contact-list li { display: flex; gap: 1rem; font-size: 0.88rem; padding: 0.55rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); color: rgba(255,255,255,0.7); }
-  .contact-list li:last-child { border-bottom: none; }
-  .contact-label { color: rgba(255,255,255,0.35); min-width: 60px; font-size: 0.78rem; letter-spacing: 0.04em; padding-top: 1px; flex-shrink: 0; }
-  .contact-list a { color: var(--accent-light); text-decoration: none; }
-  .contact-list a:hover { color: var(--accent); }
-
-  .metrics { background: var(--navy-mid); display: flex; justify-content: center; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.06); }
-  .metric { flex: 1; min-width: 140px; padding: 28px 2%; text-align: center; border-right: 1px solid rgba(255,255,255,0.06); }
-  .metric:last-child { border-right: none; }
-  .metric-num { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 600; color: var(--accent); display: block; }
-  .metric-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 4px; display: block; }
-
-  section { padding: 80px 8%; }
-  .section-label { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 1.2rem; }
-  .section-title { font-family: var(--font-serif); font-size: clamp(1.6rem, 2.5vw, 2.2rem); color: var(--navy); margin-bottom: 2.4rem; line-height: 1.25; font-weight: 600; }
-  .divider { height: 1px; background: var(--border); margin: 0 8%; }
-
-  .research-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
-  .research-card { border: 1px solid var(--border); border-radius: 8px; padding: 1.8rem; background: var(--off-white); transition: border-color 0.2s, transform 0.2s; }
-  .research-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-  .research-icon { font-size: 1.6rem; margin-bottom: 1rem; display: block; }
-  .research-card h3 { font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.6rem; }
-  .research-card p { font-size: 0.88rem; color: var(--text-mid); line-height: 1.65; }
-
-  .bio-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 4rem; align-items: start; }
-  .bio-text p { font-size: 1rem; color: var(--text-mid); line-height: 1.85; margin-bottom: 1.2rem; }
-  .bio-text p:last-child { margin-bottom: 0; }
-  .timeline { list-style: none; }
-  .timeline li { display: flex; gap: 1rem; padding: 0.9rem 0; border-bottom: 1px solid var(--border); font-size: 0.88rem; }
-  .timeline li:last-child { border-bottom: none; }
-  .tl-year { color: var(--accent); font-weight: 700; min-width: 56px; font-size: 0.78rem; padding-top: 2px; flex-shrink: 0; }
-  .tl-content { color: var(--text-mid); line-height: 1.55; }
-  .tl-content strong { color: var(--text-dark); font-weight: 600; }
-
-  .pub-section { background: var(--off-white); }
-  .pub-tabs { display: flex; gap: 0; margin-bottom: 2rem; border-bottom: 2px solid var(--border); }
-  .pub-tab { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.05em; padding: 0.6rem 1.4rem; cursor: pointer; color: var(--text-muted); border-bottom: 2px solid transparent; margin-bottom: -2px; background: none; border-top: none; border-left: none; border-right: none; transition: color 0.2s; }
-  .pub-tab.active { color: var(--navy); border-bottom-color: var(--accent); }
-  .pub-list { list-style: none; }
-  .pub-item { padding: 1.4rem 0; border-bottom: 1px solid var(--border); display: flex; gap: 1.4rem; align-items: flex-start; }
-  .pub-item:last-child { border-bottom: none; }
-  .pub-year-badge { background: var(--navy); color: var(--accent); font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 4px; min-width: 48px; text-align: center; flex-shrink: 0; margin-top: 3px; letter-spacing: 0.04em; }
-  .pub-details h4 { font-size: 0.95rem; font-weight: 600; color: var(--navy); margin-bottom: 0.3rem; line-height: 1.4; }
-  .pub-details p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
-  .pub-details .pub-venue { color: var(--text-mid); font-style: italic; }
-  .pub-more { margin-top: 1.8rem; }
-
-  .news-list { list-style: none; }
-  .news-item { display: flex; gap: 2rem; padding: 1.2rem 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
-  .news-item:last-child { border-bottom: none; }
-  .news-date { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); min-width: 80px; padding-top: 3px; letter-spacing: 0.05em; flex-shrink: 0; }
-  .news-content { font-size: 0.92rem; color: var(--text-mid); line-height: 1.6; }
-  .news-content strong { color: var(--text-dark); }
-  .news-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; padding: 2px 8px; border-radius: 100px; margin-left: 0.5rem; text-transform: uppercase; vertical-align: middle; }
-  .tag-new { background: #e8f5e9; color: #2e7d32; }
-  .tag-book { background: #e3f2fd; color: #1565c0; }
-  .tag-award { background: #fff8e1; color: #e65100; }
-
-  footer { background: var(--navy); color: rgba(255,255,255,0.4); padding: 40px 8%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem; }
-  footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
-  footer a:hover { color: var(--accent); }
-  .footer-logo { font-family: var(--font-serif); color: rgba(255,255,255,0.7); font-size: 1rem; }
-
-  @media (max-width: 768px) {
-    .hero { grid-template-columns: 1fr; min-height: auto; }
-    .hero-left { padding: 56px 6% 36px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
-    .hero-right { padding: 36px 6% 56px; flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
-    .photo-wrap { width: 130px; height: 158px; }
-    .bio-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .nav-links { display: none; position: absolute; top: 60px; left: 0; right: 0; background: var(--white); padding: 1.5rem 8%; border-bottom: 1px solid var(--border); flex-direction: column; gap: 1rem; }
-    .nav-links.open { display: flex; }
-    .nav-toggle { display: block; }
-    section { padding: 56px 6%; }
-    .divider { margin: 0 6%; }
-    footer { flex-direction: column; text-align: center; }
-  }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #0f1c2e; --navy-mid: #1a2e47; --accent: #c8a96e; --accent-light: #e8d5aa;
+  --white: #fafaf8; --off-white: #f2f0eb; --text-dark: #1a1a1a; --text-mid: #4a4a4a;
+  --text-muted: #7a7a7a; --border: rgba(0,0,0,0.1);
+  --font-serif: 'Lora', Georgia, serif; --font-sans: 'Source Sans 3', system-ui, sans-serif;
+}
+html { scroll-behavior: smooth; }
+html, body { overflow-x: hidden; }
+body { font-family: var(--font-sans); background: var(--white); color: var(--text-dark); line-height: 1.7; overflow-wrap: break-word; word-break: break-word; }
+img { max-width: 100%; }
+nav {
+  position: sticky; top: 0; z-index: 100; background: rgba(250,250,248,0.96);
+  backdrop-filter: blur(8px); border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%; height: 60px;
+}
+.nav-logo { font-family: var(--font-serif); font-size: 1rem; font-weight: 600; color: var(--navy); text-decoration: none; letter-spacing: 0.02em; }
+.nav-links { display: flex; gap: 1.6rem; list-style: none; align-items: center; }
+.nav-links a { font-size: 0.78rem; color: var(--text-mid); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; transition: color 0.2s; }
+.nav-links a:hover { color: var(--navy); }
+.nav-cv { background: var(--accent); color: var(--navy) !important; padding: 5px 14px; border-radius: 4px; }
+.nav-cv:hover { background: var(--accent-light); }
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; font-size: 1.4rem; color: var(--navy); }
+.hero { background: var(--navy); color: var(--white); display: grid; grid-template-columns: 1fr 1fr; min-height: 85vh; }
+.hero-left { padding: 80px 6% 80px 8%; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid rgba(255,255,255,0.08); }
+.hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; font-weight: 600; }
+.hero-name { font-family: var(--font-serif); font-size: clamp(2.4rem, 4vw, 3.8rem); font-weight: 600; line-height: 1.1; margin-bottom: 1rem; color: var(--white); }
+.hero-title { font-size: 1rem; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 0.3rem; }
+.hero-affil { font-size: 0.88rem; color: rgba(255,255,255,0.4); margin-bottom: 2rem; }
+.hero-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.4rem; }
+.badge { font-size: 0.72rem; padding: 4px 14px; border: 1px solid rgba(200,169,110,0.5); border-radius: 100px; color: var(--accent); letter-spacing: 0.04em; font-weight: 600; }
+.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn { display: inline-block; font-size: 0.82rem; padding: 11px 26px; border-radius: 4px; text-decoration: none; font-weight: 600; letter-spacing: 0.04em; transition: all 0.2s; cursor: pointer; border: none; }
+.btn-primary { background: var(--accent); color: var(--navy); }
+.btn-primary:hover { background: var(--accent-light); }
+.btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.3); }
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+.btn-dark { background: var(--navy); color: var(--white); border: 1px solid rgba(255,255,255,0.2); }
+.btn-dark:hover { background: var(--navy-mid); border-color: var(--accent); }
+.hero-right { padding: 80px 8% 80px 6%; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 2rem; }
+.photo-wrap { width: 220px; height: 265px; border-radius: 8px; overflow: hidden; border: 3px solid rgba(200,169,110,0.35); flex-shrink: 0; }
+.photo-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.hero-contact { width: 100%; }
+.hero-contact h3 { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; font-weight: 600; }
+.contact-list { list-style: none; }
+.contact-list li { display: flex; gap: 1rem; font-size: 0.88rem; padding: 0.55rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); color: rgba(255,255,255,0.7); flex-wrap: wrap; }
+.contact-list a { overflow-wrap: anywhere; word-break: break-word; }
+.contact-list li:last-child { border-bottom: none; }
+.contact-label { color: rgba(255,255,255,0.35); min-width: 100px; font-size: 0.78rem; letter-spacing: 0.04em; padding-top: 1px; flex-shrink: 0; }
+.contact-list a { color: var(--accent-light); text-decoration: none; }
+.contact-list a:hover { color: var(--accent); }
+section { padding: 80px 8%; }
+.section-label { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 1.2rem; }
+.section-title { font-family: var(--font-serif); font-size: clamp(1.6rem, 2.5vw, 2.2rem); color: var(--navy); margin-bottom: 2.4rem; line-height: 1.25; font-weight: 600; }
+.divider { height: 1px; background: var(--border); margin: 0 8%; }
+.research-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+.research-card { border: 1px solid var(--border); border-radius: 8px; padding: 1.8rem; background: var(--off-white); transition: border-color 0.2s, transform 0.2s; }
+.research-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.research-icon { font-size: 1.6rem; margin-bottom: 1rem; display: block; }
+.research-card h3 { font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.6rem; }
+.research-card p { font-size: 0.88rem; color: var(--text-mid); line-height: 1.65; }
+.bio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.bio-text p { font-size: 1rem; color: var(--text-mid); line-height: 1.85; margin-bottom: 1.2rem; }
+.bio-text p:last-child { margin-bottom: 0; }
+.timeline { list-style: none; }
+.timeline li { display: flex; gap: 1rem; padding: 0.9rem 0; border-bottom: 1px solid var(--border); font-size: 0.88rem; }
+.timeline li:last-child { border-bottom: none; }
+.tl-year { color: var(--accent); font-weight: 700; min-width: 70px; font-size: 0.78rem; padding-top: 2px; flex-shrink: 0; }
+.tl-content { color: var(--text-mid); line-height: 1.55; }
+.tl-content strong { color: var(--text-dark); font-weight: 600; }
+.pub-section { background: var(--off-white); }
+.pub-controls { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; align-items: center; }
+.pub-search { flex: 1; min-width: 200px; padding: 8px 14px; border: 1px solid var(--border); border-radius: 4px; font-size: 0.88rem; font-family: var(--font-sans); background: var(--white); color: var(--text-dark); }
+.pub-search:focus { outline: none; border-color: var(--accent); }
+.pub-tabs { display: flex; gap: 0; border-bottom: 2px solid var(--border); margin-bottom: 1.5rem; flex-wrap: wrap; }
+.pub-tab { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; padding: 0.6rem 1.2rem; cursor: pointer; color: var(--text-muted); border-bottom: 2px solid transparent; margin-bottom: -2px; background: none; border-top: none; border-left: none; border-right: none; transition: color 0.2s; }
+.pub-tab.active { color: var(--navy); border-bottom-color: var(--accent); }
+.pub-count { font-size: 0.7rem; background: var(--navy); color: var(--accent); padding: 1px 7px; border-radius: 100px; margin-left: 5px; font-weight: 700; vertical-align: middle; }
+#pub-list-wrap { max-height: 560px; overflow-y: auto; border: 1px solid var(--border); border-radius: 6px; padding: 0 1rem; background: var(--white); }
+#pub-list { list-style: none; }
+.pub-item { padding: 1.2rem 0; border-bottom: 1px solid var(--border); display: flex; gap: 1.2rem; align-items: flex-start; }
+.pub-item:last-child { border-bottom: none; }
+.pub-year-badge { background: var(--navy); color: var(--accent); font-size: 0.7rem; font-weight: 700; padding: 3px 8px; border-radius: 4px; min-width: 44px; text-align: center; flex-shrink: 0; margin-top: 3px; letter-spacing: 0.04em; }
+.pub-details h4 { font-size: 0.92rem; font-weight: 600; color: var(--navy); margin-bottom: 0.25rem; line-height: 1.4; }
+.pub-details .pub-venue { font-size: 0.8rem; color: var(--text-mid); font-style: italic; line-height: 1.5; }
+.pub-details .pub-authors { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem; line-height: 1.4; }
+.pub-empty { padding: 2rem 0; color: var(--text-muted); font-style: italic; }
+.projects-grid { display: grid; grid-template-columns: 1fr; gap: 0; }
+.proj-item { padding: 1.2rem 0; border-bottom: 1px solid var(--border); display: flex; gap: 1.5rem; align-items: flex-start; }
+.proj-item:last-child { border-bottom: none; }
+.proj-badge { font-size: 0.68rem; font-weight: 700; padding: 3px 10px; border-radius: 100px; flex-shrink: 0; margin-top: 3px; letter-spacing: 0.04em; text-transform: uppercase; }
+.proj-ongoing { background: #e8f5e9; color: #2e7d32; }
+.proj-completed { background: #e3f2fd; color: #1565c0; }
+.proj-consult { background: #fff8e1; color: #e65100; }
+.proj-workshop { background: #f3e5f5; color: #6a1b9a; }
+.proj-details h4 { font-size: 0.92rem; font-weight: 600; color: var(--navy); margin-bottom: 0.2rem; line-height: 1.4; }
+.proj-details p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+.proj-sub { margin-bottom: 2rem; }
+.proj-sub-title { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.8rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--accent-light); }
+.students-section { background: var(--off-white); }
+.student-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+.student-group { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 1.6rem; }
+.student-group h3 { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+.student-list { list-style: none; }
+.student-list li { padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 0.86rem; color: var(--text-mid); line-height: 1.5; }
+.student-list li:last-child { border-bottom: none; }
+.student-list .s-name { font-weight: 600; color: var(--text-dark); display: block; }
+.student-list .s-meta { font-size: 0.78rem; color: var(--text-muted); }
+.awards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; }
+.award-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 1.4rem 1.6rem; display: flex; gap: 1rem; align-items: flex-start; }
+.award-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+.award-body h4 { font-size: 0.92rem; font-weight: 600; color: var(--navy); margin-bottom: 0.2rem; }
+.award-body p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+.news-list { list-style: none; }
+.news-item { display: flex; gap: 2rem; padding: 1.2rem 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+.news-item:last-child { border-bottom: none; }
+.news-date { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); min-width: 80px; padding-top: 3px; letter-spacing: 0.05em; flex-shrink: 0; }
+.news-content { font-size: 0.92rem; color: var(--text-mid); line-height: 1.6; }
+.news-content strong { color: var(--text-dark); }
+.news-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; padding: 2px 8px; border-radius: 100px; margin-left: 0.5rem; text-transform: uppercase; vertical-align: middle; }
+.tag-new { background: #e8f5e9; color: #2e7d32; }
+.tag-book { background: #e3f2fd; color: #1565c0; }
+.tag-award { background: #fff8e1; color: #e65100; }
+.tag-fellow { background: #f3e5f5; color: #6a1b9a; }
+.proj-scroll { max-height: 480px; overflow-y: auto; border: 1px solid var(--border); border-radius: 6px; padding: 0 1rem; background: var(--white); margin-bottom: 0; }
+.students-scroll { max-height: 540px; overflow-y: auto; border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.2rem; background: var(--white); }
+footer { background: var(--navy); color: rgba(255,255,255,0.4); padding: 40px 8%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem; }
+footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+footer a:hover { color: var(--accent); }
+.footer-logo { font-family: var(--font-serif); color: rgba(255,255,255,0.7); font-size: 1rem; }
+@media (max-width: 900px) { .bio-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-left { padding: 56px 6% 36px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .hero-right { padding: 36px 6% 56px; flex-direction: row; flex-wrap: wrap; align-items: flex-start; gap: 2rem; }
+  .photo-wrap { width: 130px; height: 158px; }
+  nav { padding: 0 6%; }
+  .nav-links { display: none; position: absolute; top: 60px; left: 0; right: 0; background: var(--white); padding: 1.5rem 6%; border-bottom: 1px solid var(--border); flex-direction: column; gap: 1rem; align-items: flex-start; }
+  .nav-links.open { display: flex; }
+  .nav-toggle { display: block; }
+  section { padding: 56px 6%; }
+  .divider { margin: 0 6%; }
+  footer { flex-direction: column; text-align: center; }
+  .news-item { flex-direction: column; gap: 0.3rem; }
+  .news-date { min-width: 0; }
+  .pub-controls { flex-direction: column; align-items: stretch; }
+}
+@media (max-width: 480px) {
+  .nav-logo { font-size: 0.9rem; }
+  .hero-left { padding: 44px 6% 32px; }
+  .hero-right { padding: 32px 6% 48px; flex-direction: column; align-items: center; text-align: left; }
+  .photo-wrap { width: 150px; height: 182px; align-self: center; }
+  .hero-cta { width: 100%; }
+  .hero-cta .btn { flex: 1 1 auto; text-align: center; }
+  .contact-label { min-width: 72px; }
+  section { padding: 48px 7%; }
+  .section-title { margin-bottom: 1.8rem; }
+  .bio-grid { gap: 2rem; }
+  .pub-item, .proj-item { gap: 0.85rem; }
+  #pub-list-wrap, .proj-scroll { padding: 0 0.8rem; }
+  .award-card { padding: 1.2rem 1.1rem; }
+  .research-grid, .student-grid, .awards-grid { grid-template-columns: 1fr; }
+  .student-list { grid-template-columns: 1fr !important; }
+}
 </style>
 </head>
 <body>
@@ -145,30 +179,36 @@
 <nav>
   <a href="#" class="nav-logo">Saikat Chakrabarti</a>
   <ul class="nav-links" id="navLinks">
-    <li><a href="#research">Research</a></li>
     <li><a href="#bio">About</a></li>
+    <li><a href="#research">Research</a></li>
     <li><a href="#publications">Publications</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#students">Students</a></li>
     <li><a href="#news">News</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="SC_CV.pdf" download class="nav-cv">⬇ CV</a></li>
   </ul>
   <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Toggle menu">☰</button>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-left">
     <p class="hero-eyebrow">IIT Kanpur · Electrical Engineering</p>
     <h1 class="hero-name">Saikat<br>Chakrabarti</h1>
-    <p class="hero-title">Chair Professor &amp; Ministry of Skill Development Chair</p>
-    <p class="hero-affil">Department of Electrical Engineering, IIT Kanpur 208016, India</p>
+    <p class="hero-title">Professor, Department of Electrical Engineering</p>
+    <p class="hero-affil">Indian Institute of Technology Kanpur 208016, India</p>
     <div class="hero-badges">
       <span class="badge">IEEE Fellow</span>
       <span class="badge">INAE Fellow</span>
-      <span class="badge">IE Fellow</span>
+      <span class="badge">IE(India) Fellow</span>
+      
     </div>
     <div class="hero-cta">
       <a href="mailto:saikatc@iitk.ac.in" class="btn btn-primary">Get in Touch</a>
       <a href="https://scholar.google.co.in/citations?user=XrUg8HwAAAAJ&hl=en" target="_blank" class="btn btn-outline">Google Scholar →</a>
+      <a href="https://orcid.org/0000-0003-2224-4308" target="_blank" class="btn btn-outline">ORCID →</a>
+      <a href="https://www.researchgate.net/profile/Saikat-Chakrabarti-3" target="_blank" class="btn btn-outline">ResearchGate →</a>
+      <a href="https://iitk.irins.org/profile/53489" target="_blank" class="btn btn-outline">IRINS →</a>
     </div>
   </div>
   <div class="hero-right">
@@ -181,267 +221,575 @@
         <li><span class="contact-label">Email</span><a href="mailto:saikatc@iitk.ac.in">saikatc@iitk.ac.in</a></li>
         <li><span class="contact-label">Alt</span><a href="mailto:saikat.chakrabarti@gmail.com">saikat.chakrabarti@gmail.com</a></li>
         <li><span class="contact-label">Phone</span>+91-512-259-6598</li>
-        <li><span class="contact-label">Fax</span>+91-512-259-0063</li>
-        <li><span class="contact-label">ORCID</span><a href="https://orcid.org/0000-0003-2224-4308" target="_blank">0000-0003-2224-4308</a></li>
+        <li><span class="contact-label">LinkedIn</span><a href="https://www.linkedin.com/in/saikat-chakrabarti-3576159" target="_blank">LinkedIn Profile</a></li>
       </ul>
     </div>
   </div>
 </div>
 
-<!-- METRICS -->
-<div class="metrics">
-  <div class="metric"><span class="metric-num">7,873</span><span class="metric-label">Citations</span></div>
-  <div class="metric"><span class="metric-num">41</span><span class="metric-label">H-Index</span></div>
-  <div class="metric"><span class="metric-num">236</span><span class="metric-label">Publications</span></div>
-  <div class="metric"><span class="metric-num">15+</span><span class="metric-label">Years at IIT Kanpur</span></div>
-  <div class="metric"><span class="metric-num">3</span><span class="metric-label">Fellow Distinctions</span></div>
-</div>
-
-<!-- RESEARCH -->
-<section id="research">
-  <p class="section-label">Areas of Expertise</p>
-  <h2 class="section-title">Research</h2>
-  <div class="research-grid">
-    <div class="research-card">
-      <span class="research-icon">⚡</span>
-      <h3>Power System State Estimation</h3>
-      <p>WLS and hybrid state estimation, PMU integration, observability analysis, bad data detection, PMU placement using ILP and greedy algorithms.</p>
-    </div>
-    <div class="research-card">
-      <span class="research-icon">🛰️</span>
-      <h3>Synchrophasor Technology</h3>
-      <p>Phasor measurement units (PMUs), synchronized measurement systems, uncertainty quantification, WAMS for monitoring and protection.</p>
-    </div>
-    <div class="research-card">
-      <span class="research-icon">🔌</span>
-      <h3>Smart Transmission &amp; Distribution</h3>
-      <p>Monitoring, control, and protection of smart grid systems. Stability and control with high penetration of renewable energy sources.</p>
-    </div>
-    <div class="research-card">
-      <span class="research-icon">🔋</span>
-      <h3>Microgrids</h3>
-      <p>Operation, control, and energy management of microgrids. Distributed generation integration and droop-based control strategies.</p>
-    </div>
-    <div class="research-card">
-      <span class="research-icon">🌐</span>
-      <h3>Distribution System Analysis</h3>
-      <p>Distribution system state estimation, planning and operation of distribution networks, coordinated transmission–distribution estimation.</p>
-    </div>
-    <div class="research-card">
-      <span class="research-icon">📊</span>
-      <h3>Power System Modelling</h3>
-      <p>Generator and load modelling, voltage stability analysis, static load modelling, voltage stability indices.</p>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- BIO -->
 <section id="bio">
   <p class="section-label">Biography</p>
   <h2 class="section-title">About</h2>
   <div class="bio-grid">
     <div class="bio-text">
-      <p>Prof. Saikat Chakrabarti completed his PhD in Electrical Engineering from the Memorial University of Newfoundland, Canada, in 2006. Prior to his doctoral studies, he worked at Asea Brown Boveri (ABB) Limited, India and at the Bhabha Atomic Research Centre (BARC), India.</p>
-      <p>Following his PhD, he served as a Special Scientist at the University of Cyprus, and subsequently as a Research Associate and then Lecturer at the Queensland University of Technology, Brisbane, Australia.</p>
-      <p>Since 2009, he has been with the Department of Electrical Engineering at IIT Kanpur, where he has held the position of Professor since November 2018, and holds the Ministry of Skill Development and Entrepreneurship Chair. From July 2023 to April 2024, he served as Professor and Director of the Emera and NB Power Research Centre for Smart Grid Technologies at the University of New Brunswick, Fredericton, Canada (on long leave from IIT Kanpur).</p>
-      <p>His research focuses on the monitoring, control, and protection of smart transmission and distribution systems and microgrids. He is the author of over 236 publications including journal papers, conference papers, and books, with 7,873 citations and an h-index of 41.</p>
+      <p>Prof. Saikat Chakrabarti completed his PhD in Electrical Engineering from the Memorial University of Newfoundland, Canada, in 2006. Prior to his doctoral studies, he worked as a Marketing and Commissioning Engineer at Asea Brown Boveri (ABB) Limited, India, and as a Scientific Officer in the Electronics Division of the Bhabha Atomic Research Centre (BARC), India.</p>
+      <p>Following his PhD, he served as a Special Scientist at the University of Cyprus, and subsequently as a Research Associate and Lecturer at the Queensland University of Technology, Brisbane, Australia. Since December 2009, he has been with the Department of Electrical Engineering at IIT Kanpur, as Assistant Professor (2009–2014), Associate Professor (2014–2018), and Professor (2018–present).</p>
+      <p>From July 2023 to April 2024, he served as Professor and Director of the Emera and NB Power Research Centre for Smart Grid Technologies at the University of New Brunswick, Fredericton, Canada (on leave from IIT Kanpur).</p>
+      <p>His research interests are in the monitoring, control, and protection of smart transmission and distribution systems and microgrids. He is an IEEE Fellow (from January 2026), Fellow of the Indian National Academy of Engineering (INAE), Fellow of the Institution of Engineers (India).</p>
+      <p>He serves as Associate Editor of <em>IEEE Transactions on Smart Grid</em> (from December 2022), Associate Editor of <em>International Journal of Electrical Power &amp; Energy Systems</em> (from November 2020), and Editor of <em>IEEE Power Engineering Letters</em> (from January 2020).</p>
     </div>
     <div>
-      <p class="section-label" style="margin-bottom:1rem;">Academic Timeline</p>
+      <p class="section-label" style="margin-bottom:1rem;">Career Timeline</p>
       <ul class="timeline">
-        <li><span class="tl-year">2023–24</span><div class="tl-content"><strong>Chair Prof. &amp; Director</strong>, Emera &amp; NB Power Research Centre, Univ. of New Brunswick, Canada</div></li>
-        <li><span class="tl-year">2018–</span><div class="tl-content"><strong>Professor</strong> (Ministry of Skill Dev. &amp; Entrepreneurship Chair), Dept. of EE, IIT Kanpur, India</div></li>
-        <li><span class="tl-year">2014–2018</span><div class="tl-content"><strong>Associate Professor</strong>, Dept. of EE, IIT Kanpur, India</div></li>        <li><span class="tl-year">2009–2014</span><div class="tl-content"><strong>Assistant Professor</strong>, Dept. of EE, IIT Kanpur, India</div></li>
+        <li><span class="tl-year">2018–</span><div class="tl-content"><strong>Professor</strong>, Dept. of EE, IIT Kanpur, India</div></li>
+        <li><span class="tl-year">2023–24</span><div class="tl-content"><strong>Professor &amp; Director</strong>, Emera &amp; NB Power Research Centre, Univ. of New Brunswick, Canada</div></li>
+        <li><span class="tl-year">2014–2018</span><div class="tl-content"><strong>Associate Professor</strong>, Dept. of EE, IIT Kanpur, India</div></li>
+        <li><span class="tl-year">2009–2014</span><div class="tl-content"><strong>Assistant Professor</strong>, Dept. of EE, IIT Kanpur, India</div></li>
         <li><span class="tl-year">2009</span><div class="tl-content"><strong>Lecturer</strong>, Queensland Univ. of Technology, Brisbane, Australia</div></li>
-        <li><span class="tl-year">2008</span><div class="tl-content"><strong>Research Associate</strong>, Queensland Univ. of Technology, Australia</div></li>
-        <li><span class="tl-year">2006</span><div class="tl-content"><strong>Special Scientist</strong>, University of Cyprus, Cyprus</div></li>
+        <li><span class="tl-year">2008–09</span><div class="tl-content"><strong>Research Associate</strong>, Queensland Univ. of Technology, Australia</div></li>
+        <li><span class="tl-year">2006–08</span><div class="tl-content"><strong>Special Scientist</strong>, University of Cyprus</div></li>
         <li><span class="tl-year">2006</span><div class="tl-content"><strong>PhD</strong>, Electrical Engineering, Memorial Univ. of Newfoundland, Canada</div></li>
-        <li><span class="tl-year">Pre-PhD</span><div class="tl-content"><strong>ABB Limited</strong> &amp; <strong>BARC</strong>, India</div></li>
+        <li><span class="tl-year">2000</span><div class="tl-content"><strong>ME</strong>, Electrical Engineering, Jadavpur University, India</div></li>
+        <li><span class="tl-year">2000–02</span><div class="tl-content"><strong>Scientific Officer</strong>, Electronics Division, Bhabha Atomic Research Centre (BARC), India</div></li>
+        <li><span class="tl-year">1997–98</span><div class="tl-content"><strong>Marketing &amp; Commissioning Engineer</strong>, Relay &amp; Control Panels Division, Asea Brown Boveri (ABB) Ltd., India</div></li>
+        <li><span class="tl-year">1997</span><div class="tl-content"><strong>BE</strong>, Electrical Engineering, NIT Durgapur, India</div></li>
       </ul>
     </div>
   </div>
 </section>
-
 <div class="divider"></div>
 
-<!-- PUBLICATIONS -->
-<section id="publications" class="pub-section">
-  <p class="section-label">Scholarly Work</p>
-  <h2 class="section-title">Selected Publications</h2>
-  <div class="pub-tabs">
-    <button class="pub-tab active" onclick="showTab('journals', this)">Journal Papers</button>
-    <button class="pub-tab" onclick="showTab('books', this)">Books</button>
-  </div>
-  <ul class="<ul class="pub-list" id="journals">
-          <li class="pub-item">
-            <span class="pub-year-badge">2026</span>
-            <div class="pub-details">
-              <h4>Dynamic thermal line rating estimation for power system</h4>
-              <p class="pub-venue"><em>IEEE Transactions on Power Delivery</em>, accepted April 2026 (in press)</p>
-              <p>N. K. Sharma, S. Chakrabarti, A. Sharma</p>
-            </div>
-          </li>
-
-          <li class="pub-item">
-            <span class="pub-year-badge">2021</span>
-            <div class="pub-details">
-              <h4>Grid-forming control for solar PV systems with power reserves</h4>
-              <p class="pub-venue"><em>IEEE Transactions on Sustainable Energy</em>, Vol. 12, No. 4, pp. 1947–1959</p>
-              <p>B. Pawar, E. I. Batzelis, S. Chakrabarti, B. C. Pal</p>
-            </div>
-          </li>
-
-          <li class="pub-item">
-            <span class="pub-year-badge">2021</span>
-            <div class="pub-details">
-              <h4>Protection of networked microgrids using relays with multiple setting groups</h4>
-              <p class="pub-venue"><em>IEEE Transactions on Industrial Informatics</em>, Vol. 18, No. 6, pp. 3713–3723</p>
-              <p>M. N. Alam, S. Chakrabarti, A. K. Pradhan</p>
-            </div>
-          </li>
-
-          <li class="pub-item">
-            <span class="pub-year-badge">2020</span>
-            <div class="pub-details">
-              <h4>A benchmark test system for networked microgrids</h4>
-              <p class="pub-venue"><em>IEEE Transactions on Industrial Informatics</em>, Vol. 16, No. 10, pp. 6217–6230</p>
-              <p>M. N. Alam, S. Chakrabarti, X. Liang</p>
-            </div>
-          </li>
-
-          <li class="pub-item">
-            <span class="pub-year-badge">2018</span>
-            <div class="pub-details">
-              <h4>Networked microgrids: State-of-the-art and future perspectives</h4>
-              <p class="pub-venue"><em>IEEE Transactions on Industrial Informatics</em>, Vol. 15, No. 3, pp. 1238–1250</p>
-              <p>M. N. Alam, S. Chakrabarti, A. Ghosh</p>
-            </div>
-          </li>
-
-          <li class="pub-item">
-            <span class="pub-year-badge">2016</span>
-            <div class="pub-details">
-              <h4>A non-unit protection scheme for DC microgrid based on local measurements</h4>
-              <p class="pub-venue"><em>IEEE Transactions on Power Delivery</em>, Vol. 32, No. 1, pp. 172–181</p>
-              <p>A. Meghwani, S. C. Srivastava, S. Chakrabarti</p>
-            </div>
-          </li>
-
-          <li class="pub-item">
-            <span class="pub-year-badge">2017</span>
-            <div class="pub-details">
-              <h4>Voltage stability monitoring of power systems using reduced network and ANN</h4>
-              <p class="pub-venue"><em>International Journal of Electrical Power &amp; Energy Systems</em>, Vol. 87, pp. 43–51</p>
-              <p>S. M. Ashraf, A. Gupta, D. K. Choudhary, S. Chakrabarti</p>
-            </div>
-          </li>
-
-          <li class="pub-item">
-            <span class="pub-year-badge">2012</span>
-            <div class="pub-details">
-              <h4>Reconfiguration of power distribution systems considering reliability and power loss</h4>
-              <p class="pub-venue"><em>IEEE Transactions on Power Delivery</em>, Vol. 27, No. 2, pp. 918–926</p>
-              <p>B. Amanulla, S. Chakrabarti, S. N. Singh</p>
-            </div>
-          </li>
-
-          <li class="pub-item">
-            <span class="pub-year-badge">2009</span>
-            <div class="pub-details">
-              <h4>PMU measurement uncertainty considerations in WLS state estimation</h4>
-              <p class="pub-venue"><em>IEEE Transactions on Power Systems</em>, Vol. 24, No. 2, pp. 1062–1071</p>
-              <p>S. Chakrabarti, E. Kyriakides</p>
-            </div>
-          </li>
-
-          <li class="pub-item">
-            <span class="pub-year-badge">2008</span>
-            <div class="pub-details">
-              <h4>Optimal placement of phasor measurement units for power system observability</h4>
-              <p class="pub-venue"><em>IEEE Transactions on Power Systems</em>, Vol. 23, No. 3, pp. 1433–1440</p>
-              <p>S. Chakrabarti, E. Kyriakides</p>
-            </div>
-          </li>
-        </ul>
-  <ul class="<ul class="pub-list" id="books" style="display:none;">
-          <li class="pub-item">
-            <span class="pub-year-badge">2024</span>
-            <div class="pub-details">
-              <h4>Voltage Stability of Power Systems</h4>
-              <p class="pub-venue">Monograph in <em>Foundations and Trends in Electric Energy Systems</em>, vol. 8, no. 2, pp. 124–168, 2024</p>
-              <p>S. Chakrabarti</p>
-            </div>
-          </li>
-
-          <li class="pub-item">
-            <span class="pub-year-badge">2024</span>
-            <div class="pub-details">
-              <h4>State Estimation Algorithms</h4>
-              <p class="pub-venue">Chapter in <em>Experience on Use of State Estimator in Power System Operations</em>, Springer, 2024. ISBN: 978-3-031-62866-9</p>
-              <p>S. Chakrabarti, A. Sharma, S. C. Srivastava</p>
-            </div>
-          </li>
-
-          <li class="pub-item">
-            <span class="pub-year-badge">2016</span>
-            <div class="pub-details">
-              <h4>State Estimation in the Presence of Synchronized Measurements</h4>
-              <p class="pub-venue">Chapter in <em>Synchronized Phasor Measurements for Smart Grids</em>, IET Power and Energy Series, ISBN: 978-1-78561-011-0</p>
-              <p>S. K. Mallik, S. Chakrabarti, S. N. Singh</p>
-            </div>
-          </li>
-
-          <li class="pub-item">
-            <span class="pub-year-badge">2008</span>
-            <div class="pub-details">
-              <h4>Application of ANN for Online Voltage Stability Monitoring</h4>
-              <p class="pub-venue">VDM Verlag, Saarbücken, Germany, 2008</p>
-              <p>S. Chakrabarti</p>
-            </div>
-          </li>
-        </ul>
-  <div class="pub-more">
-    <a href="https://scholar.google.co.in/citations?user=XrUg8HwAAAAJ&hl=en" target="_blank" class="btn btn-dark">View all 236 publications on Google Scholar →</a>
+<section id="research">
+  <p class="section-label">Areas of Expertise</p>
+  <h2 class="section-title">Research Interests</h2>
+  <div class="research-grid">
+    <div class="research-card"><span class="research-icon">⚡</span><h3>Power System Monitoring &amp; State Estimation</h3><p>Synchrophasor (PMU)-assisted real-time state estimation, wide-area monitoring system (WAMS), dynamic state estimation, digital twin for power systems, hybrid state estimation considering SCADA, PMU, smart meters, and any other measurement systems.</p></div>
+    <div class="research-card"><span class="research-icon">🛡️</span><h3>Protection and Control of Microgrids</h3><p>Networked operation and control of microgrids, protection coordination, AI/ML applications in microgrid protection.</p></div>
+    <div class="research-card"><span class="research-icon">🌊</span><h3>Dynamics &amp; Stability of Power Systems with Renewables</h3><p>Angle, voltage, and frequency stability assessment and control of power systems with large penetration of converter-interfaced generation (CIG).</p></div>
+    <div class="research-card"><span class="research-icon">📐</span><h3>Power System Modelling</h3><p>Measurement-based modelling of generating systems and loads, machine learning for power systems, non-intrusive load monitoring (NILM), data-driven parameter estimation.</p></div>
+    <div class="research-card"><span class="research-icon">🔌</span><h3>Electric Vehicle Integration Studies</h3><p>Impact assessment of large-scale EV integration to grid, planning and operation studies, control algorithms for G2V and V2G operation.</p></div>
   </div>
 </section>
-
 <div class="divider"></div>
 
-<!-- NEWS -->
+<section id="publications" class="pub-section">
+  <p class="section-label">Scholarly Work</p>
+  <h2 class="section-title">Publications</h2>
+  <div class="pub-controls">
+    <input type="text" class="pub-search" id="pubSearch" placeholder="Search by title, author, journal…" oninput="filterPubs()">
+  </div>
+  <div class="pub-tabs">
+    <button class="pub-tab active" data-type="all" onclick="setTab(this)">All</button>
+    <button class="pub-tab" data-type="journal" onclick="setTab(this)">Journals</button>
+    <button class="pub-tab" data-type="conference" onclick="setTab(this)">Conferences</button>
+    <button class="pub-tab" data-type="book" onclick="setTab(this)">Books &amp; Chapters</button>
+    <button class="pub-tab" data-type="patent" onclick="setTab(this)">Patents</button>
+  </div>
+  <div id="pub-list-wrap"><ul id="pub-list"></ul></div>
+  <div style="margin-top:1.8rem;">
+    <a href="https://scholar.google.co.in/citations?user=XrUg8HwAAAAJ&hl=en" target="_blank" class="btn btn-dark">View on Google Scholar →</a>
+  </div>
+</section>
+<div class="divider"></div>
+
+<section id="awards">
+  <p class="section-label">Recognition</p>
+  <h2 class="section-title">Awards &amp; Honours</h2>
+  <div class="awards-grid">
+    <div class="award-card"><span class="award-icon">🏅</span><div class="award-body"><h4>IEEE Fellow</h4><p>Elevated to IEEE Fellow from January 2026, for contributions to power system state and parameter estimation, and networked microgrid protection and control.</p></div></div>
+    <div class="award-card"><span class="award-icon">🏅</span><div class="award-body"><h4>INAE Fellow</h4><p>Elected Fellow of the Indian National Academy of Engineering (INAE), 2021. Citation: "For outstanding contribution to the Smart Grid research and development in India and fundamental contributions to the monitoring, control, and protection of power transmission and distribution systems."</p></div></div>
+    <div class="award-card"><span class="award-icon">🏅</span><div class="award-body"><h4>IE(India) Fellow</h4><p>Elected Fellow of the Institution of Engineers (India), 2019.</p></div></div>
+    <div class="award-card"><span class="award-icon">🏅</span><div class="award-body"><h4>Sigma Xi Member</h4><p>Invited to Full Membership in Sigma Xi, The Scientific Research Honor Society, USA, September 2025.</p></div></div>
+    <div class="award-card"><span class="award-icon">🏅</span><div class="award-body"><h4>AAIS Fellow</h4><p>Elected Fellow of the International Academy of Artificial Intelligence Sciences (AAIS), January 2026.</p></div></div>
+    <div class="award-card"><span class="award-icon">🏅</span><div class="award-body"><h4>International AI Industry Alliance Fellow</h4><p>Elected Fellow of the International Artificial Intelligence Industry Alliance, 2024.</p></div></div>
+    <div class="award-card"><span class="award-icon">🎓</span><div class="award-body"><h4>Emera Research Chair</h4><p>Emera Research Chair in Smart Grid Technologies, Univ. of New Brunswick, July 2023 – June 2028 (availed July 2023 – April 2024).</p></div></div>
+    <div class="award-card"><span class="award-icon">🎓</span><div class="award-body"><h4>Ministry of Skill Development Chair</h4><p>Ministry of Skill Development and Entrepreneurship Chair Professorship, IIT Kanpur, 2022–2025.</p></div></div>
+    <div class="award-card"><span class="award-icon">🎓</span><div class="award-body"><h4>Sajani Kumar Roy Memorial Chair</h4><p>Sajani Kumar Roy Memorial Chair Professorship, IIT Kanpur, 2019–2022.</p></div></div>
+    <div class="award-card"><span class="award-icon">🎓</span><div class="award-body"><h4>P. K. Kelkar Young Faculty Research Fellow</h4><p>P. K. Kelkar Young Faculty Research Fellow, IIT Kanpur, 2012–2015.</p></div></div>
+    <div class="award-card"><span class="award-icon">🏆</span><div class="award-body"><h4>ISGF Innovation Award 2019</h4><p>India Smart Grid Forum (ISGF) Innovation Award 2019 in "Smart Technology of the Year" for the MoP-funded smart city R&amp;D platform project.</p></div></div>
+    <div class="award-card"><span class="award-icon">🏆</span><div class="award-body"><h4>IEEE UP Section Outstanding Engineer Award</h4><p>IEEE Uttar Pradesh PES/IAS Chapter Outstanding Engineer Award, February 2016.</p></div></div>
+    <div class="award-card"><span class="award-icon">🏆</span><div class="award-body"><h4>David Dunsiger Award</h4><p>David Dunsiger Award for Excellence in graduate studies and research, Memorial University of Newfoundland, 2007.</p></div></div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<section id="projects">
+  <p class="section-label">Sponsored &amp; Consultancy</p>
+  <h2 class="section-title">Projects</h2>
+
+  <div class="proj-sub">
+    <p class="proj-sub-title">Ongoing / Accepted</p>
+    <div class="proj-scroll"><div class="projects-grid">
+      <div class="proj-item">
+        <span class="proj-badge proj-ongoing">Ongoing</span>
+        <div class="proj-details">
+          <h4>Grid Readiness for EV: Enablers and Technological Developments (GREET)</h4>
+          <p>Funding: Anusandhan National Research Foundation (ANRF), Govt. of India &nbsp;·&nbsp; June 2025 – May 2027 &nbsp;·&nbsp; Role: PI</p>
+        </div>
+      </div>
+      <div class="proj-item">
+        <span class="proj-badge proj-ongoing">Ongoing</span>
+        <div class="proj-details">
+          <h4>Centre for Rechargeable Energy Storage for Augmenting Transportation and Electrification</h4>
+          <p>Funding: SERB, India &nbsp;·&nbsp; March 2022 – March 2027 &nbsp;·&nbsp; Role: Co-PI &nbsp;·&nbsp; INR 8,45,85,151</p>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="proj-sub">
+    <p class="proj-sub-title">Completed</p>
+    <div class="proj-scroll"><div class="projects-grid">
+      <div class="proj-item"><span class="proj-badge proj-completed">Sponsored</span><div class="proj-details"><h4>Operation, protection, and control of power grids with large penetration of renewables</h4><p>NSERC Discovery Grant, Canada &nbsp;·&nbsp; April 2024 – May 2029 &nbsp;·&nbsp; Role: PI &nbsp;·&nbsp; CAD 2,30,000 <em>(approved but not undertaken following relocation from Canada)</em></p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-completed">Sponsored</span><div class="proj-details"><h4>Advanced Distribution System Monitoring</h4><p>New Brunswick Innovation Foundation, Canada &nbsp;·&nbsp; July 2023 – July 2025 &nbsp;·&nbsp; Role: PI &nbsp;·&nbsp; CAD 55,000</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-consult">Consultancy</span><div class="proj-details"><h4>Development of digital signal processing algorithms for numerical protection relay</h4><p>Synergy Systems &amp; Solutions &nbsp;·&nbsp; July 2022 – June 2023 &nbsp;·&nbsp; Role: PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-consult">Consultancy</span><div class="proj-details"><h4>Technical verification of relay settings for 750 V DC traction and 220 kV / 33 kV AC systems — Kanpur Metro</h4><p>Uttar Pradesh Metro Rail Corporation Ltd. &nbsp;·&nbsp; Nov. 2021 – July 2022 &nbsp;·&nbsp; Role: Co-PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-completed">Sponsored</span><div class="proj-details"><h4>Interconnected Microgrids for Rural Electrification</h4><p>Ministry of Electronics and Information Technology (MEITY), India &nbsp;·&nbsp; Dec. 2020 – Dec. 2022 &nbsp;·&nbsp; Role: Co-PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-consult">Consultancy</span><div class="proj-details"><h4>Technical service to Adani Green Energy Ltd. for solar IDT installation</h4><p>Adani Green Energy Ltd. &nbsp;·&nbsp; Nov. 2020 – June 2021 &nbsp;·&nbsp; Role: PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-consult">Consultancy</span><div class="proj-details"><h4>Technical inspection of UPPTCL HV line</h4><p>Uttar Pradesh Power Transmission Corporation Ltd. &nbsp;·&nbsp; Sept. 2020 – March 2021 &nbsp;·&nbsp; Role: PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-completed">Sponsored</span><div class="proj-details"><h4>Study on Cyber-physical Approach for Electric Power Grid</h4><p>Department of Science and Technology (DST), India &nbsp;·&nbsp; March 2020 – March 2023 &nbsp;·&nbsp; Role: PI (IIT Kanpur)</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-workshop">Workshop</span><div class="proj-details"><h4>Training Program on Smart Grid Components and Technologies</h4><p>National Smart Grid Mission, Ministry of Power, Govt. of India &nbsp;·&nbsp; Feb. 2020 – Jan. 2022 (two workshops/year) &nbsp;·&nbsp; Role: PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-completed">Sponsored</span><div class="proj-details"><h4>Stability analysis, protection, and coordinated control of networked microgrids</h4><p>DST, India (Mission Innovation) &nbsp;·&nbsp; July 2019 – July 2021 &nbsp;·&nbsp; Role: PI (IIT Kanpur)</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-consult">Consultancy</span><div class="proj-details"><h4>Development of PMU-based IT-OT applications for line fault location</h4><p>Calcutta Electric Supply Corporation (CESC) Ltd., Kolkata &nbsp;·&nbsp; July 2019 – July 2020 &nbsp;·&nbsp; Role: PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-consult">Consultancy</span><div class="proj-details"><h4>Technical support in implementation of SCADA/ADMS/GIS in KESCO area, Kanpur</h4><p>Kanpur Electricity Supply Company (KESCO), India &nbsp;·&nbsp; May 2019 – May 2022 &nbsp;·&nbsp; Role: PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-consult">Consultancy</span><div class="proj-details"><h4>Technical inspection of KESCO underground cable network</h4><p>KESCO Ltd., Kanpur &nbsp;·&nbsp; Oct. 2018 – Jan. 2019 &nbsp;·&nbsp; Role: PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-consult">Consultancy</span><div class="proj-details"><h4>Investigating the failure of towers on 400 kV Parichha-Orai-Mainpuri line of UPPTCL</h4><p>UPPTCL &nbsp;·&nbsp; Role: PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-workshop">Workshop</span><div class="proj-details"><h4>Training Program on Smart Grid for Utility Professionals</h4><p>National Smart Grid Mission, Ministry of Power &nbsp;·&nbsp; Jan. 17–19, 2018 &nbsp;·&nbsp; Role: PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-completed">Sponsored</span><div class="proj-details"><h4>UI-ASSIST: US-India collAborative for Smart diStribution System wIth STorage</h4><p>IUSSTF, DST India, and DOE USA &nbsp;·&nbsp; Sep. 2017 – Aug. 2022 &nbsp;·&nbsp; Role: Co-PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-completed">Sponsored</span><div class="proj-details"><h4>UK India Clean Energy Research Institute</h4><p>DST, India &nbsp;·&nbsp; Apr. 2017 – Apr. 2021 &nbsp;·&nbsp; Role: PI (Task leader — Stability Issues)</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-consult">Consultancy</span><div class="proj-details"><h4>Use of synchrophasor data for tuning power system stabilizer and online estimation of generator parameters</h4><p>National Thermal Power Corporation (NTPC) Ltd. &nbsp;·&nbsp; Nov. 2016 – Nov. 2018 &nbsp;·&nbsp; Role: PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-consult">Consultancy</span><div class="proj-details"><h4>Study to minimize over-voltage and inrush current of transformers during connecting of grid-tied solar PV plant</h4><p>NTPC Ltd., India &nbsp;·&nbsp; Role: Co-PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-completed">Sponsored</span><div class="proj-details"><h4>Development of R&amp;D platform for smart city projects in the Indian context</h4><p>Ministry of Power (MoP), India, and IIT Kanpur &nbsp;·&nbsp; Dec. 2014 – June 2022 &nbsp;·&nbsp; Role: PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-completed">Sponsored</span><div class="proj-details"><h4>Advanced communication and control for the prevention of blackouts</h4><p>DST, India and EPSRC, UK &nbsp;·&nbsp; Nov. 2014 – Sep. 2018 &nbsp;·&nbsp; Role: PI (IIT Kanpur side, Indian consortium)</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-completed">Sponsored</span><div class="proj-details"><h4>Stabilize Energy (EU FP7 INDIGO)</h4><p>DST and European Union &nbsp;·&nbsp; 2014–2017 &nbsp;·&nbsp; Role: PI (IIT Kanpur side)</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-completed">Sponsored</span><div class="proj-details"><h4>Use of synchrophasors in power system load modelling and state estimation</h4><p>Central Power Research Institute (RSOP) &nbsp;·&nbsp; 2014–2016 &nbsp;·&nbsp; Role: PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-workshop">Workshop</span><div class="proj-details"><h4>Smart Transmission Grid using Synchrophasor Technology</h4><p>Dec. 10–14, 2013 &nbsp;·&nbsp; Role: PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-workshop">Workshop</span><div class="proj-details"><h4>Exploring beyond the frontiers to build a smarter grid</h4><p>DST, India, and the Royal Society, London &nbsp;·&nbsp; Mar. 20–22, 2013 &nbsp;·&nbsp; Role: PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-consult">Consultancy</span><div class="proj-details"><h4>Clarification on national building code of India</h4><p>Mukesh &amp; Associates, Tamil Nadu &nbsp;·&nbsp; Feb.–Mar. 2013 &nbsp;·&nbsp; Role: PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-consult">Consultancy</span><div class="proj-details"><h4>Studies on voltage stability and small signal oscillation monitoring of power systems</h4><p>GE India Technology Center Pvt. Ltd., Bangalore &nbsp;·&nbsp; Nov. 2012 – Aug. 2013 &nbsp;·&nbsp; Role: PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-consult">Consultancy</span><div class="proj-details"><h4>Feasibility study to run the state tubewells in UP using SCADA</h4><p>Irrigation Department, Uttar Pradesh &nbsp;·&nbsp; June–Aug. 2012 &nbsp;·&nbsp; Role: PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-completed">Sponsored</span><div class="proj-details"><h4>Synchronized measurement technology for voltage stability monitoring and state estimation of power systems</h4><p>DST, India &nbsp;·&nbsp; Oct. 2010 – Oct. 2013 &nbsp;·&nbsp; Role: PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-completed">Sponsored</span><div class="proj-details"><h4>Synchronized measurement technology for power systems: selected applications</h4><p>IIT Kanpur, India &nbsp;·&nbsp; Feb. 2010 – Oct. 2011 &nbsp;·&nbsp; Role: PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-completed">Sponsored</span><div class="proj-details"><h4>Application of synchrophasor technology in power systems</h4><p>Queensland University of Technology, Australia &nbsp;·&nbsp; Feb. 2009 – Feb. 2010 &nbsp;·&nbsp; Role: PI</p></div></div>
+      <div class="proj-item"><span class="proj-badge proj-completed">Sponsored</span><div class="proj-details"><h4>Detection and location of fault on a transmission line using synchronized measurements</h4><p>Queensland University of Technology, Australia &nbsp;·&nbsp; Feb. 2009 – Feb. 2010 &nbsp;·&nbsp; Role: PI</p></div></div>
+    </div></div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<section id="students" class="students-section">
+  <p class="section-label">Researchers &amp; Students Advised</p>
+  <h2 class="section-title">Students</h2>
+  <div class="students-scroll"><div class="student-grid">
+
+    <div class="student-group">
+      <h3>Current Postdoctoral Fellows</h3>
+      <ul class="student-list">
+        <li><span class="s-name">Dr. M. Pandit</span><span class="s-meta">PhD from IIT Ropar · since June 2026</span></li>
+        <li><span class="s-name">Dr. A. Bharati</span><span class="s-meta">PhD from NIT Rourkela · since October 2025</span></li>
+        <li><span class="s-name">Dr. T. Alam</span><span class="s-meta">PhD from IIT Roorkee · since September 2025</span></li>
+        <li><span class="s-name">Dr. R. Rastogi</span><span class="s-meta">PhD from NIT Allahabad · since September 2025</span></li>
+      </ul>
+    </div>
+
+    <div class="student-group">
+      <h3>Former Postdoctoral Fellows</h3>
+      <ul class="student-list">
+        <li><span class="s-name">Dr. S. Ghosh</span><span class="s-meta">PhD, Jadavpur University · Jan 2022 – present</span></li>
+        <li><span class="s-name">Dr. Y. Bansal</span><span class="s-meta">PhD, IIT Ropar · Nov 2021 – Jan 2023</span></li>
+        <li><span class="s-name">Dr. V. K. Gaur</span><span class="s-meta">PhD, IIT Roorkee · Sep 2021 – Oct 2023</span></li>
+        <li><span class="s-name">Dr. O. Yadav</span><span class="s-meta">National Postdoc, NIT Allahabad · 2020–2021</span></li>
+        <li><span class="s-name">Dr. J. G. Sreenath</span><span class="s-meta">PhD, IIT Kanpur · Jan 2020 – Nov 2021</span></li>
+        <li><span class="s-name">Dr. K. Swain</span><span class="s-meta">PhD, NIT Patna · Oct 2019 – Nov 2023</span></li>
+        <li><span class="s-name">Dr. A. Dubey</span><span class="s-meta">PhD, IIT Kanpur · 2019–2020</span></li>
+        <li><span class="s-name">Dr. M. N. Alam</span><span class="s-meta">PhD, IIT Roorkee · 2018–2020</span></li>
+        <li><span class="s-name">Dr. Suman M</span><span class="s-meta">PhD, NIT Trichy · Jan–Jun 2019</span></li>
+      </ul>
+    </div>
+
+    <div class="student-group">
+      <h3>Ongoing PhD Students</h3>
+      <ul class="student-list">
+        <li><span class="s-name">S. Chatterjee</span><span class="s-meta">Distribution state estimation · since 2020 · Co-sup: Prof. A. Mohapatra</span></li>
+        <li><span class="s-name">A. Anand</span><span class="s-meta">Distribution system protection · since 2020 · Co-sup: Prof. A. Mohapatra</span></li>
+        <li><span class="s-name">N. K. Sharma</span><span class="s-meta">Joint state estimation of transmission and distribution systems · since 2020 · Co-sup: Prof. A. Sharma</span></li>
+        <li><span class="s-name">T. Ahmed</span><span class="s-meta">Power system state estimation · since 2026</span></li>
+      </ul>
+    </div>
+
+    <div class="student-group">
+      <h3>Completed PhD Students</h3>
+      <ul class="student-list">
+        <li><span class="s-name">J. K. Mahawar</span><span class="s-meta">Enhancing the performance of doubly fed induction generator under grid disturbances · 2026 · Co-sup: Prof. G. M. Vishwanath</span></li>
+        <li><span class="s-name">M. Sehrawat</span><span class="s-meta">Improved dynamic state estimation methods for modern power systems · 2025 · Co-sup: Prof. K. Rajawat</span></li>
+        <li><span class="s-name">V. Patel</span><span class="s-meta">Intelligent data-driven techniques for distribution system state estimation and cyber-attack resilient fault analysis · 2025</span></li>
+        <li><span class="s-name">P. B. Bhimrao</span><span class="s-meta">Stability analysis and enhanced control for inverter-integrated power systems · 2024</span></li>
+        <li><span class="s-name">B. R. Kumar</span><span class="s-meta">Phasor domain algorithms for high-speed protection of electric power networks · 2023 · Co-sup: Prof. A. Mohapatra</span></li>
+        <li><span class="s-name">S. Som</span><span class="s-meta">Control and stability enhancement of islanded microgrids with battery energy storage systems · 2023 · Co-sup: Prof. S. R. Sahoo</span></li>
+        <li><span class="s-name">A. Mitra</span><span class="s-meta">Data-driven approaches for parameter estimation, modeling, and monitoring of power system components · 2023 · Co-sup: Prof. A. Mohapatra</span></li>
+        <li><span class="s-name">B. Rathore</span><span class="s-meta">Stability improvement of microgrids using virtual synchronous generator control · 2022</span></li>
+        <li><span class="s-name">C. L. Dewangan</span><span class="s-meta">Solar power forecasting and incentive schemes for voltage control and residential demand response · May 2022 · Co-sup: Prof. S. N. Singh</span></li>
+        <li><span class="s-name">R. Dutta</span><span class="s-meta">State, topology, and parameter estimation of active distribution networks · Mar. 2022 · Co-sup: Prof. A. Sharma</span></li>
+        <li><span class="s-name">S. M. Ashraf</span><span class="s-meta">Synchrophasor-assisted voltage stability monitoring and control and transient stability assessment of power systems · Apr. 2021</span></li>
+        <li><span class="s-name">P. W. Pande</span><span class="s-meta">Estimation of low frequency oscillation modes in power systems and online tuning of the PSS using synchrophasor measurements · 2021 · Co-sup: Prof. S. C. Srivastava</span></li>
+        <li><span class="s-name">P. Gangwar</span><span class="s-meta">Multi-objective distribution network reconfiguration and optimal allocation of renewable energy sources · 2020 · Co-sup: Prof. S. N. Singh</span></li>
+        <li><span class="s-name">J. G. Sreenath</span><span class="s-meta">Distributed forecasting-aided power system state estimation in the presence of bad data, time-skewed measurements, and cyber-attacks · 2019 · Co-sup: Prof. K. Rajawat</span></li>
+        <li><span class="s-name">A. Dubey</span><span class="s-meta">Synchrophasor-assisted advanced state estimators for power systems · 2019 · Co-sup: Prof. A. Sharma</span></li>
+        <li><span class="s-name">A. Meghwani</span><span class="s-meta">Development of efficient fault detection and location techniques for DC microgrid protection · 2018 · Co-sup: Prof. S. C. Srivastava</span></li>
+        <li><span class="s-name">V. Vignesh</span><span class="s-meta">Improved load modelling and its impact on stability of power systems having large penetration of wind generation · 2016 · Co-sup: Prof. S. C. Srivastava</span></li>
+        <li><span class="s-name">S. K. Mallik</span><span class="s-meta">Synchronized measurement technology for state estimation and enhanced power system visualization · 2015 · Co-sup: Prof. S. N. Singh</span></li>
+        <li><span class="s-name">C. V. V. S. B. Reddy</span><span class="s-meta">Voltage stability monitoring and control using synchronized measurement technology · 2014 · Co-sup: Prof. S. C. Srivastava</span></li>
+        <li><span class="s-name">A. Sharma</span><span class="s-meta">Multilevel distributed power system state estimator for smart grid applications · 2014 · Co-sup: Prof. S. C. Srivastava</span></li>
+      </ul>
+    </div>
+
+    <div class="student-group" style="grid-column: 1 / -1;">
+      <h3>Completed MTech / MS Students (34)</h3>
+      <ul class="student-list" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0 2rem;">
+        <li><span class="s-name">V. Kumar</span><span class="s-meta">Distance protection for PV-connected lines · 2023</span></li>
+        <li><span class="s-name">V. Kumar</span><span class="s-meta">Voltage profile improvement in distribution systems · 2023</span></li>
+        <li><span class="s-name">A. Kishore</span><span class="s-meta">Frequency support from DFIG-based wind turbine · 2020</span></li>
+        <li><span class="s-name">A. Thakur</span><span class="s-meta">Hybrid energy storage with DC/AC distribution · 2020</span></li>
+        <li><span class="s-name">H. Mishra</span><span class="s-meta">Demand side management · 2020</span></li>
+        <li><span class="s-name">R. K. Yadav</span><span class="s-meta">Droop secondary controller for islanded DC microgrid · 2020</span></li>
+        <li><span class="s-name">B. P. Singh</span><span class="s-meta">Load forecasting · 2020</span></li>
+        <li><span class="s-name">A. Kumar</span><span class="s-meta">Robust design and coordinated tuning of PSS · 2018</span></li>
+        <li><span class="s-name">A. Khan</span><span class="s-meta">Parameter and topology estimation for distribution system · 2018</span></li>
+        <li><span class="s-name">Santhoshkumar</span><span class="s-meta">Robust three-phase distribution SE with hybrid measurements · 2019</span></li>
+        <li><span class="s-name">G. Garg</span><span class="s-meta">Optimal day-ahead load scheduling in islanded microgrid · 2018</span></li>
+        <li><span class="s-name">S. Sahoo</span><span class="s-meta">Optimal dispatch scheduling for residential battery storage · 2018</span></li>
+        <li><span class="s-name">S. Patre</span><span class="s-meta">Parameter estimation of synchronous generator · 2018</span></li>
+        <li><span class="s-name">B. Uppin</span><span class="s-meta">Transfer function based dynamic load modelling · 2018</span></li>
+        <li><span class="s-name">Sathish Kumar</span><span class="s-meta">Estimation of aggregate harmonic load model · 2018</span></li>
+        <li><span class="s-name">N. Negi</span><span class="s-meta">Decentralized adaptive primary/secondary control for AC microgrid · 2016</span></li>
+        <li><span class="s-name">G. A. Kumar</span><span class="s-meta">Rotor angle estimation and coherency detection · 2015</span></li>
+        <li><span class="s-name">M. Mukherjee</span><span class="s-meta">Voltage stability monitoring using Lyapunov exponent · 2015</span></li>
+        <li><span class="s-name">K. M. Naik</span><span class="s-meta">Optimal demand response for PV-integrated households · 2015</span></li>
+        <li><span class="s-name">N. Singh</span><span class="s-meta">Observability analysis with hybrid measurements · 2015</span></li>
+        <li><span class="s-name">J. G. Sreenath</span><span class="s-meta">Optimal smoother based dynamic state estimator · 2015</span></li>
+        <li><span class="s-name">P. Porwal</span><span class="s-meta">Recursive Prony method for oscillation monitoring · 2014</span></li>
+        <li><span class="s-name">M. Jha</span><span class="s-meta">Rotor angle estimation via PMU measurements · 2014</span></li>
+        <li><span class="s-name">R. P. Kundu</span><span class="s-meta">Voltage stability assessment · 2013</span></li>
+        <li><span class="s-name">V. M. Pandurang</span><span class="s-meta">State estimation with external network equivalents · 2013</span></li>
+        <li><span class="s-name">S. Chitturi</span><span class="s-meta">Techniques for monitoring power system oscillations · 2013</span></li>
+        <li><span class="s-name">S. Gangavarapu</span><span class="s-meta">Current differential protection considering parameter uncertainties · 2012</span></li>
+        <li><span class="s-name">C. P. K. Reddy</span><span class="s-meta">Adaptive load shedding strategy · 2012</span></li>
+        <li><span class="s-name">K. Dongare</span><span class="s-meta">State estimation considering real-time external network equivalents · 2012</span></li>
+        <li><span class="s-name">B. Amanulla</span><span class="s-meta">Distribution system reconfiguration considering reliability · 2011</span></li>
+        <li><span class="s-name">V. S. K. Reddy</span><span class="s-meta">Fault location on transmission lines · 2011</span></li>
+        <li><span class="s-name">A. Kumar</span><span class="s-meta">ANN-based hybrid state estimation using PSO · 2011</span></li>
+        <li><span class="s-name">N. K. Meena</span><span class="s-meta">Multi-criteria PMU placement for observability · 2011</span></li>
+        <li><span class="s-name">G. Gourav</span><span class="s-meta">Bang-bang modulated FACTS stabilizing controllers · 2011</span></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+<div class="divider"></div>
+
 <section id="news">
   <p class="section-label">Updates</p>
   <h2 class="section-title">News &amp; Announcements</h2>
   <ul class="news-list">
-    <li class="news-item">
-      <span class="news-date">2023–24</span>
-      <div class="news-content">Served as <strong>Chair Professor and Director</strong>, Emera &amp; NB Power Research Centre for Smart Grid Technologies, University of New Brunswick, Canada.</div>
-    </li>
-    <li class="news-item">
-      <span class="news-date">2018</span>
-      <div class="news-content">Appointed to <strong>Ministry of Skill Development and Entrepreneurship Chair</strong> at IIT Kanpur. <span class="news-tag tag-award">Chair</span></div>
-    </li>
-    <li class="news-item">
-      <span class="news-date">Ongoing</span>
-      <div class="news-content"><strong>PhD positions available</strong> in power system monitoring, state estimation, and smart grid technologies. Motivated candidates are encouraged to reach out directly. <span class="news-tag tag-new">Open</span></div>
-    </li>
+    <li class="news-item"><span class="news-date">Jan 2026</span><div class="news-content"><strong>Elevated to IEEE Fellow</strong> for contributions to power system state and parameter estimation, and networked microgrid protection and control.<span class="news-tag tag-fellow">Fellow</span></div></li>
+    <li class="news-item"><span class="news-date">Jan 2026</span><div class="news-content">Delivered <strong>keynote lecture</strong> on "Big data sources in power systems" at IEEE PES International Conference 2026, Hong Kong.<span class="news-tag tag-new">Talk</span></div></li>
+    <li class="news-item"><span class="news-date">Jun 2025</span><div class="news-content">New ongoing project: <strong>GREET</strong> (Grid Readiness for EV) funded by ANRF, Govt. of India. June 2025 – May 2027. Role: PI.<span class="news-tag tag-new">Project</span></div></li>
+    <li class="news-item"><span class="news-date">Apr 2026</span><div class="news-content">Paper accepted in <strong>IEEE Transactions on Power Delivery</strong>: "Dynamic thermal line rating estimation of power system."<span class="news-tag tag-book">Paper</span></div></li>
+    <li class="news-item"><span class="news-date">2024</span><div class="news-content">Published monograph <strong>"Voltage Stability of Power Systems"</strong> in <em>Foundations and Trends in Electric Energy Systems</em>, vol. 8, no. 2.<span class="news-tag tag-book">Book</span></div></li>
+    <li class="news-item"><span class="news-date">2023–24</span><div class="news-content">Served as <strong>Professor and Director</strong>, Emera &amp; NB Power Research Centre for Smart Grid Technologies, University of New Brunswick, Canada.<span class="news-tag tag-award">Role</span></div></li>
+    <li class="news-item"><span class="news-date">Ongoing</span><div class="news-content"><strong>PhD positions available</strong> in power system monitoring, state estimation, smart grid technologies, and microgrids. Contact: <a href="mailto:saikatc@iitk.ac.in">saikatc@iitk.ac.in</a><span class="news-tag tag-new">Open</span></div></li>
   </ul>
 </section>
 
 <footer>
   <span class="footer-logo">Saikat Chakrabarti</span>
   <span>Department of Electrical Engineering · IIT Kanpur 208016 · India</span>
-  <span>© 2025 · <a href="mailto:saikatc@iitk.ac.in">saikatc@iitk.ac.in</a></span>
+  <span>© 2026 · <a href="mailto:saikatc@iitk.ac.in">saikatc@iitk.ac.in</a></span>
 </footer>
 
 <script>
-  function showTab(tab, el) {
-    document.getElementById('journals').style.display = tab === 'journals' ? 'block' : 'none';
-    document.getElementById('books').style.display = tab === 'books' ? 'block' : 'none';
-    document.querySelectorAll('.pub-tab').forEach(function(t){ t.classList.remove('active'); });
-    el.classList.add('active');
+const PUBS = [
+// BOOKS (4)
+{y:2024,t:"journal",title:"Voltage Stability of Power Systems",venue:"Monograph in <em>Foundations and Trends in Electric Energy Systems</em>, vol. 8, no. 2, pp. 124–168, 2024",authors:"S. Chakrabarti",type:"book"},
+{y:2024,t:"journal",title:"State Estimation Algorithms",venue:"Chapter in <em>Experiences on Use of State Estimator in Power System Operations</em>, Springer, 2024. ISBN: 978-3-031-62866-5",authors:"S. Chakrabarti, A. Sharma, S. C. Srivastava",type:"book"},
+{y:2016,t:"journal",title:"State Estimation in the Presence of Synchronized Measurements",venue:"Chapter in <em>Synchronized Phasor Measurements for Smart Grids</em>, IET. ISBN: 978-1-78561-011-0",authors:"S. K. Mallik, S. Chakrabarti, S. N. Singh",type:"book"},
+{y:2008,t:"journal",title:"Application of Artificial Neural Networks for Online Voltage Stability Monitoring and Enhancement of an Electric Power System",venue:"VDM Verlag, Saarbrücken, Germany, 2008",authors:"S. Chakrabarti",type:"book"},
+// PATENTS (4)
+{y:2023,t:"patent",title:"Method and system for real time monitoring of a power system",venue:"Indian Patent No. 553871",authors:"S. P. Singh, S. Chakrabarti, D. Shukla",type:"patent"},
+{y:2022,t:"patent",title:"A method for parameter estimation of untransposed distribution cable and system thereof",venue:"Indian Patent No. 527862",authors:"R. Dutta, S. Chakrabarti, A. Sharma",type:"patent"},
+{y:2018,t:"patent",title:"A control device to minimize the inrush current",venue:"Indian Patent, Appl. No. 201811024706, Jul. 2018",authors:"P. Pachore, A. Jain, S. Anand, S. Chakrabarti et al.",type:"patent"},
+{y:2014,t:"patent",title:"Monitoring of devices installed at remote locations",venue:"Indian Patent Application No. 1322/DEL/2014",authors:"A. Sharma, P. Banerjee, S. C. Srivastava, S. Chakrabarti",type:"patent"},
+// JOURNALS (111)
+{y:2026,type:"journal",title:"Dynamic thermal line rating estimation of power system",venue:"<em>IEEE Transactions on Power Delivery</em>, accepted April 2026 (in press)",authors:"N. K. Sharma, S. Chakrabarti, A. Sharma"},
+{y:2026,type:"journal",title:"Bilateral event-triggered adaptive state estimator for demand response enabled distribution systems",venue:"<em>Electric Power Systems Research</em>, accepted 2026 (in press)",authors:"S. Chatterjee, S. Chakrabarti, A. Mohapatra"},
+{y:2026,type:"journal",title:"Enhancing performance of doubly fed induction generator under unbalanced voltage",venue:"<em>IEEE Transactions on Industry Applications</em>, Early Access, 2026",authors:"J. K. Mahawar, S. Chakrabarti"},
+{y:2025,type:"journal",title:"Coordinated state estimation of power transmission and distribution systems",venue:"<em>IET Generation, Transmission &amp; Distribution</em>, vol. 19, no. 1, art. 70163, 2025",authors:"N. K. Sharma, S. Chakrabarti, A. Sharma"},
+{y:2025,type:"journal",title:"Angle reference based three-phase state estimation of power distribution systems",venue:"<em>IEEE Transactions on Industrial Informatics</em>, Early Access, 2025",authors:"N. K. Sharma, S. Chakrabarti, A. Sharma"},
+{y:2025,type:"journal",title:"Adaptive and robust distribution system state estimator handling unknown noise statistics",venue:"<em>IEEE Transactions on Industrial Informatics</em>, accepted July 2025 (in press)",authors:"S. Chatterjee, S. Chakrabarti, A. Mohapatra"},
+{y:2025,type:"journal",title:"Data-driven Bayesian framework to mitigate smart meter asynchrony in forecasting aided distribution system state estimation",venue:"<em>IEEE Transactions on Instrumentation &amp; Measurement</em>, accepted May 2025 (in press)",authors:"S. Chatterjee, S. Ghosh, S. Chakrabarti, A. Mohapatra"},
+{y:2025,type:"journal",title:"Multi-target control technique for DFIG under unbalanced voltage",venue:"<em>IEEE Transactions on Energy Conversion</em>, accepted February 2025 (in press)",authors:"J. K. Mahawar, M. Sehrawat, G. M. Vishwanath, S. Chakrabarti"},
+{y:2025,type:"journal",title:"Dynamic state estimator for power systems modeled by constrained differential-algebraic equations",venue:"<em>Electric Power Systems Research</em>, vol. 242, art. 111419, May 2025",authors:"M. Sehrawat, S. Chakrabarti, K. Rajawat"},
+{y:2024,type:"journal",title:"State estimation for integrated energy systems: motivations, advances, and future work",venue:"<em>IEEE Transactions on Power Systems</em>, accepted December 2024 (in press)",authors:"J. Zhao, A. Srivastava, Y. Cetenovic, Y. Lin, V. Levi, G. Yin, M. Huang, T. Zhang, Z. Li, Y. Chen, A. G. Exposito, W. Zhang, W. Zheng, S. Chakrabarti et al."},
+{y:2024,type:"journal",title:"Performance analysis of smart grid communication networks using co-simulation",venue:"<em>IEEE Access</em>, 2024",authors:"V. Patel, A. Soni, A. Sharma, S. Chakrabarti, A. Meghwani, S. C. Srivastava, A. Srivastava, J. G. Sreenath"},
+{y:2024,type:"journal",title:"Network-level vulnerability assessment of synchrophasor measurement devices",venue:"<em>IEEE Access</em>, 2024",authors:"K. P. Swain, A. Sharma, A. Karkare, S. Chakrabarti, E. Gryazina, V. Terzija"},
+{y:2024,type:"journal",title:"Securing power system data in motion by timestamped digital text watermarking",venue:"<em>IEEE Transactions on Smart Grid</em>, Early Access, 2024",authors:"S. D. Roy, A. Sharma, S. Chakrabarti, S. Debbarma"},
+{y:2024,type:"journal",title:"Switching attack modeling and vulnerability analysis of generator for dynamics study",venue:"<em>Sustainable Energy, Grids and Networks</em>, accepted February 2024 (in press)",authors:"S. Yadav, N. Kishor, S. Purwar, P. Raussi, S. Chakrabarti"},
+{y:2024,type:"journal",title:"An adaptive BESS controller for stability enhancement of islanded low voltage microgrids",venue:"<em>IEEE Transactions on Sustainable Energy</em>, vol. 15, no. 2, pp. 1256–1268, Apr. 2024",authors:"S. Som, S. Chakrabarti, S. R. Sahoo"},
+{y:2024,type:"journal",title:"Real-time implementation for vulnerability of power components under switching attack based on sliding mode",venue:"<em>IET Cyber-Physical Systems: Theory &amp; Applications</em>, vol. 9, no. 4, pp. 375–391, 2024",authors:"S. Yadav, N. Kishor, S. Purwar, S. Chakrabarti, P. Raussi, A. Kumar"},
+{y:2024,type:"journal",title:"Data-driven sparsification and multi-resolution analysis based framework for load identification",venue:"<em>IEEE Transactions on Smart Grid</em>, vol. 15, no. 3, pp. 2987–2999, May 2024",authors:"A. Mitra, S. Ghosh, A. Mohapatra, S. Chakrabarti"},
+{y:2024,type:"journal",title:"Development and implementation of a MATLAB-based phasor data concentrator for synchrophasor applications",venue:"<em>International Journal of Electrical Power &amp; Energy Systems</em>, vol. 155, art. 109637, Jan. 2024",authors:"S. P. Singh, S. Chakrabarti, D. Shukla, V. Terzija"},
+{y:2024,type:"journal",title:"Blockchain-based cyber-security enhancement of cyber-physical power system through symmetric encryption mechanism",venue:"<em>International Journal of Electrical Power &amp; Energy Systems</em>, vol. 155, art. 109631, Jan. 2024",authors:"D. Shukla, S. Chakrabarti, A. Sharma"},
+{y:2024,type:"journal",title:"Improving faulty phase selection in PV integrated system with compensation angle approach",venue:"<em>Electric Power Systems Research</em>, vol. 226, art. 109913, Jan. 2024",authors:"V. K. Gaur, S. Chakrabarti, A. Sharma"},
+{y:2024,type:"journal",title:"Interfacing synchronous machine model including stator transients with network for stability studies",venue:"<em>IEEE Transactions on Power Systems</em>, vol. 39, no. 1, pp. 987–990, Jan. 2024",authors:"B. Pawar, E. I. Batzelis, S. Chakrabarti, B. C. Pal"},
+{y:2024,type:"journal",title:"A weighted deep neural network for processing measurements for state estimation",venue:"<em>IEEE Transactions on Industrial Informatics</em>, vol. 20, no. 3, pp. 4027–4038, Mar. 2024",authors:"V. Patel, S. Chakrabarti, A. Sharma"},
+{y:2024,type:"journal",title:"Data-driven strategy for appliance identification using phase-space reconstruction",venue:"<em>IEEE Transactions on Smart Grid</em>, vol. 15, no. 2, pp. 1738–1750, Mar. 2024",authors:"S. Ghosh, A. Mitra, S. Chakrabarti, A. Sharma"},
+{y:2023,type:"journal",title:"An improved decentralized scheme for incentive-based demand response from residential customers",venue:"<em>Energy</em>, vol. 284, art. 128617, Dec. 2023",authors:"C. L. Dewangan, V. Vijayan, D. Shukla, S. Chakrabarti, S. N. Singh, A. Sharma, M. A. Hossain"},
+{y:2023,type:"journal",title:"A novel two-stage partitioning based reconfiguration method for active distribution networks",venue:"<em>IEEE Transactions on Power Delivery</em>, vol. 38, no. 6, pp. 4004–4016, Dec. 2023",authors:"Y. Bansal, R. Sodhi, S. Chakrabarti, A. Sharma"},
+{y:2023,type:"journal",title:"Appliance identification via combinatorial fusion analysis-assisted Bayesian-optimized classifier",venue:"<em>IEEE Transactions on Smart Grid</em>, vol. 15, no. 2, pp. 1724–1737, 2023",authors:"A. Mitra, S. Ghosh, A. Mohapatra, S. Chakrabarti"},
+{y:2023,type:"journal",title:"Decomposition-transformation assisted optimized heterogeneous classification strategy in NILM",venue:"<em>IEEE Transactions on Instrumentation and Measurement</em>, vol. 72, art. 3525514, 2023",authors:"S. Ghosh, A. Mitra, S. Chakrabarti, A. Sharma"},
+{y:2023,type:"journal",title:"High-speed sub-cycle algorithm for estimation of decaying DC component in current measurements",venue:"<em>International Journal of Electrical Power &amp; Energy Systems</em>, vol. 151, art. 109127, Sep. 2023",authors:"B. R. Kumar, A. Mohapatra, S. Chakrabarti, A. Kumar"},
+{y:2023,type:"journal",title:"Taxonomy of outlier detection methods for power system measurements",venue:"<em>IET Energy Conversion and Economics</em>, vol. 4, no. 2, pp. 73–88, Apr. 2023",authors:"V. Patel, A. Kapoor, S. Chakrabarti, A. Sharma"},
+{y:2023,type:"journal",title:"BESS reserve-based frequency support during emergency in islanded residential microgrids",venue:"<em>IEEE Transactions on Sustainable Energy</em>, vol. 14, no. 3, pp. 1702–1713, Jul. 2023",authors:"S. Som, S. Chakrabarti, S. R. Sahoo, A. Ghosh, X. Liang"},
+{y:2022,type:"journal",title:"A hierarchical voltage control scheme for wind power plants through enhanced reactive power support",venue:"<em>IEEE Transactions on Industry Applications</em>, vol. 58, no. 5, pp. 5776–5791, Sep./Oct. 2022",authors:"M. N. S. K. Shabbir, X. Liang, S. Chakrabarti"},
+{y:2022,type:"journal",title:"Phase angle based sub-cycle algorithm for high-speed digital relaying of transmission lines",venue:"<em>IEEE Transactions on Power Delivery</em>, vol. 37, no. 4, pp. 3416–3419, Aug. 2022",authors:"B. R. Kumar, A. Mohapatra, R. Gokaraju, S. Chakrabarti"},
+{y:2022,type:"journal",title:"Multi-objective multi-scenario framework for RCS placement in unbalanced distribution systems considering uncertainty",venue:"<em>IEEE Systems Journal</em>, vol. 16, no. 2, pp. 2811–2821, June 2022",authors:"P. Gangwar, S. Kesherwani, S. Chakrabarti, S. N. Singh"},
+{y:2022,type:"journal",title:"Peak-to-average ratio incentive scheme to tackle the peak-rebound challenge in TOU pricing",venue:"<em>Electric Power Systems Research</em>, vol. 210, art. 108048, Sep. 2022",authors:"C. L. Dewangan, S. N. Singh, S. Chakrabarti, K. Singh"},
+{y:2022,type:"journal",title:"An optimization-based topology error detection method for power system state estimation",venue:"<em>Electric Power Systems Research</em>, vol. 209, art. 107914, Aug. 2022",authors:"A. Srivastava, S. Chakrabarti, J. Soares, S. N. Singh"},
+{y:2022,type:"journal",title:"Protection of networked microgrids using relays with multiple setting groups",venue:"<em>IEEE Transactions on Industrial Informatics</em>, vol. 18, no. 6, pp. 3713–3723, June 2022",authors:"M. N. Alam, S. Chakrabarti, A. K. Pradhan"},
+{y:2022,type:"journal",title:"A robust data-driven approach for adaptive dynamic load modeling",venue:"<em>IEEE Transactions on Power Systems</em>, Early Access, 2022",authors:"A. Mitra, R. Dutta, A. Gupta, A. Mohapatra, S. Chakrabarti"},
+{y:2022,type:"journal",title:"A novel sub-cycle-based method for estimation of decaying DC component and fundamental phasor",venue:"<em>IEEE Transactions on Instrumentation and Measurement</em>, vol. 71, art. 9584859, 2022",authors:"B. R. Kumar, A. Mohapatra, S. Chakrabarti"},
+{y:2022,type:"journal",title:"DPMU-based multiple event detection in a microgrid considering measurement anomalies",venue:"<em>Applied Energy</em>, vol. 308, no. 15, p. 118269, Feb. 2022",authors:"S. Som, R. Dutta, A. Gholami, A. K. Srivastava, S. Chakrabarti, S. R. Sahoo"},
+{y:2022,type:"journal",title:"A fair incentive scheme for participation of smart inverters in voltage control",venue:"<em>IEEE Transactions on Industrial Informatics</em>, vol. 18, no. 1, pp. 656–665, Jan. 2022",authors:"C. L. Dewangan, S. Chakrabarti, S. N. Singh, M. Sharma"},
+{y:2022,type:"journal",title:"A robust controller for battery energy storage system of an islanded AC microgrid",venue:"<em>IEEE Transactions on Industrial Informatics</em>, vol. 18, no. 1, pp. 207–218, Jan. 2022",authors:"S. Som, S. De, S. Chakrabarti, S. R. Sahoo, A. Ghosh"},
+{y:2021,type:"journal",title:"Robust topology detection of distribution network",venue:"<em>IEEE Transactions on Power Systems</em>, vol. 36, no. 6, pp. 5967–5970, Nov. 2021",authors:"R. Dutta, S. Chakrabarti, A. Sharma"},
+{y:2021,type:"journal",title:"An L1 regularized forecasting-aided state estimator for active distribution networks",venue:"<em>IEEE Transactions on Smart Grid</em>, vol. 13, no. 3, pp. 2215–2226, 2021",authors:"R. Dutta, S. J. Geetha, S. Chakrabarti, A. Sharma"},
+{y:2021,type:"journal",title:"Grid-forming control for solar PV systems with power reserves",venue:"<em>IEEE Transactions on Sustainable Energy</em>, vol. 12, no. 4, pp. 1947–1959, Oct. 2021",authors:"B. Pawar, E. I. Batzelis, S. Chakrabarti, B. C. Pal"},
+{y:2021,type:"journal",title:"Power system anomaly detection using innovation reduction properties of iterated extended Kalman filter",venue:"<em>International Journal of Electrical Power &amp; Energy Systems</em>, vol. 136, art. 107613, 2022",authors:"Z. Jin, J. Zhao, L. Ding, S. Chakrabarti, E. Gryazina, V. Terzija"},
+{y:2021,type:"journal",title:"Spoofing attack on synchrophasor GPS clock: impact and detection in power system state estimation",venue:"<em>International Journal of Electrical Power &amp; Energy Systems</em>, vol. 134, art. 107396, 2022",authors:"S. J. Geetha, A. Meghwani, S. Chakrabarti, K. Rajawat, V. Terzija"},
+{y:2021,type:"journal",title:"Online measurement based joint estimation of synchronous generator and exciter parameters",venue:"<em>IEEE Transactions on Energy Conversion</em>, vol. 36, no. 2, pp. 820–830, June 2021",authors:"A. Mitra, A. Mohapatra, S. Chakrabarti, S. Sarkar"},
+{y:2021,type:"journal",title:"Phase angle-based fault detection and classification for protection of transmission lines",venue:"<em>International Journal of Electrical Power &amp; Energy Systems</em>, vol. 133, art. 107258, Dec. 2021",authors:"B. R. Kumar, A. Mohapatra, S. Chakrabarti, A. Kumar"},
+{y:2021,type:"journal",title:"A single machine equivalent-based approach for online tracking of power system transient stability",venue:"<em>IEEE Transactions on Power Systems</em>, vol. 36, no. 3, pp. 1688–1696, May 2021",authors:"S. M. Ashraf, S. Chakrabarti"},
+{y:2021,type:"journal",title:"A self-regulated virtual impedance control of VSG in a microgrid",venue:"<em>Electric Power Systems Research</em>, vol. 197, art. 107289, Aug. 2021",authors:"B. Rathore, S. Chakrabarti, L. Srivastava"},
+{y:2021,type:"journal",title:"Asynchronous hierarchical forecasting-aided state estimator with sub-area data validation for power systems",venue:"<em>IEEE Sensors Journal</em>, vol. 21, no. 2, pp. 2124–2133, Jan. 2021",authors:"J. G. Sreenath, S. Chakrabarti, K. Rajawat"},
+{y:2021,type:"journal",title:"Analysis of ill-conditioning of hybrid state estimators in the presence of PMU measurements",venue:"<em>IET Energy Conversion and Economics</em>, vol. 2, no. 1, pp. 35–44, 2021",authors:"S. K. Mallik, S. Chakrabarti, S. N. Singh"},
+{y:2021,type:"journal",title:"Topology tracking for active distribution networks",venue:"<em>IEEE Transactions on Power Systems</em>, vol. 36, no. 4, pp. 2855–2865, Jul. 2021",authors:"R. Dutta, S. Chakrabarti, A. Sharma"},
+{y:2021,type:"journal",title:"An improved algorithm for CKF based forecasting aided state estimation and anomaly detection",venue:"<em>International Transactions on Electrical Energy Systems</em>, vol. 31, art. e12714, 2021",authors:"Z. Jin, S. Chakrabarti, J. Yu, L. Ding, V. Terzija"},
+{y:2020,type:"journal",title:"A clustering-based approach for estimation of low frequency oscillations in power systems",venue:"<em>IEEE Transactions on Power Systems</em>, vol. 35, no. 6, pp. 4666–4677, Nov. 2020",authors:"P. W. Pande, S. Chakrabarti, S. C. Srivastava, S. Sarkar"},
+{y:2021,type:"journal",title:"ARI and ARID control of virtual synchronous generator for frequency response improvement",venue:"<em>IET Renewable Power Generation</em>, vol. 15, no. 3, pp. 664–675, 2021",authors:"B. Rathore, S. Chakrabarti, L. Srivastava"},
+{y:2021,type:"journal",title:"Parameter estimation of distribution lines using SCADA measurements",venue:"<em>IEEE Transactions on Instrumentation and Measurement</em>, vol. 70, pp. 1–11, 2021",authors:"R. Dutta, V. S. Patel, S. Chakrabarti, A. Sharma, R. K. Das, S. Mondal"},
+{y:2021,type:"journal",title:"An ANOVA-based fault diagnosis approach for variable frequency drive-fed induction motors",venue:"<em>IEEE Transactions on Energy Conversion</em>, vol. 36, no. 1, pp. 500–512, Mar. 2021",authors:"M. N. S. K. Shabbir, X. Liang, S. Chakrabarti"},
+{y:2020,type:"journal",title:"Robust distribution system state estimation with hybrid measurements",venue:"<em>IET Generation, Transmission &amp; Distribution</em>, vol. 14, no. 16, pp. 3250–3259, 2020",authors:"C. Santhosh Kumar, K. Rajawat, S. Chakrabarti, B. C. Pal"},
+{y:2020,type:"journal",title:"A hybrid robust forecasting-aided state estimator considering bimodal Gaussian mixture measurement errors",venue:"<em>International Journal of Electrical Power and Energy Systems</em>, vol. 120, Sep. 2020",authors:"Z. Jin, J. Zhao, S. Chakrabarti, L. Ding, V. Terzija"},
+{y:2020,type:"journal",title:"Combining forecasts of day-ahead solar power",venue:"<em>Energy</em>, vol. 202, art. 117743, Jul. 2020",authors:"C. L. Dewangan, S. N. Singh, S. Chakrabarti"},
+{y:2020,type:"journal",title:"Protection coordination for networked microgrids using single and dual setting overcurrent relays",venue:"<em>IET Generation, Transmission &amp; Distribution</em>, vol. 14, no. 14, pp. 2818–2820, 2020",authors:"M. N. Alam, R. Gokaraju, S. Chakrabarti"},
+{y:2020,type:"journal",title:"Short-term forecasting-based network reconfiguration for unbalanced distribution systems with distributed generators",venue:"<em>IEEE Transactions on Industrial Informatics</em>, vol. 16, no. 7, pp. 4378–4389, July 2020",authors:"P. Gangwar, S. N. Singh, S. Chakrabarti"},
+{y:2020,type:"journal",title:"Modified re-iterated Kalman filter for handling delayed and lost measurements in power system state estimation",venue:"<em>IEEE Sensors Journal</em>, vol. 20, no. 7, pp. 3946–3955, April 2020",authors:"I. Mohammed, J. G. Sreenath, S. S. Shinde, K. Rajawat, S. Chakrabarti"},
+{y:2020,type:"journal",title:"Local measurements based backup protection for DC microgrids using sequential analyzing technique",venue:"<em>IEEE Systems Journal</em>, vol. 14, no. 1, pp. 1159–1170, March 2020",authors:"A. Meghwani, R. Gokaraju, S. C. Srivastava, S. Chakrabarti"},
+{y:2020,type:"journal",title:"A benchmark test system for networked microgrids",venue:"<em>IEEE Transactions on Industrial Informatics</em>, vol. 16, no. 10, pp. 6217–6230, Oct. 2020",authors:"M. N. Alam, S. Chakrabarti, X. Liang"},
+{y:2020,type:"journal",title:"Optimal utilization of PMU measurements in power system hybrid state estimators",venue:"<em>IET Generation, Transmission &amp; Distribution</em>, vol. 14, no. 1, pp. 1159–1170, March 2020",authors:"A. Dubey, S. Chakrabarti, A. Sharma, V. Terzija"},
+{y:2020,type:"journal",title:"Model order estimation methods for low frequency oscillations in power systems",venue:"<em>International Journal of Electrical Power and Energy Systems</em>, vol. 115, Feb. 2020",authors:"P. W. Pande, B. R. Kumar, S. Chakrabarti, S. Srivastava, S. Sarkar, T. Sharma"},
+{y:2019,type:"journal",title:"Voltage stability control of power systems using reduced network based optimisation",venue:"<em>IET Generation, Transmission &amp; Distribution</em>, vol. 13, no. 17, pp. 3888–3895, Sep. 2019",authors:"S. M. Ashraf, A. Dubey, S. Chakrabarti"},
+{y:2019,type:"journal",title:"Network reconfiguration for DG-integrated unbalanced distribution system",venue:"<em>IET Generation, Transmission &amp; Distribution</em>, vol. 13, no. 17, pp. 3896–3909, Sep. 2019",authors:"P. Gangwar, S. N. Singh, S. Chakrabarti"},
+{y:2019,type:"journal",title:"Unscented RTS smoother based power system forecasting-aided state estimator using hybrid measurements",venue:"<em>IET Generation, Transmission &amp; Distribution</em>, vol. 13, no. 16, pp. 3583–3590, Aug. 2019",authors:"J. G. Sreenath, A. Sharma, S. Chakrabarti"},
+{y:2019,type:"journal",title:"Multi-objective planning model for multi-phase distribution system under uncertainty considering reconfiguration",venue:"<em>IET Renewable Power Generation</em>, vol. 13, no. 12, pp. 2070–2083, Aug. 2019",authors:"P. Gangwar, S. N. Singh, S. Chakrabarti"},
+{y:2019,type:"journal",title:"An asynchronous decentralized forecasting-aided state estimator for power systems",venue:"<em>IEEE Transactions on Power Systems</em>, vol. 34, no. 4, pp. 3059–3068, Jul. 2019",authors:"J. G. Sreenath, S. Chakrabarti, K. Rajawat, V. Terzija"},
+{y:2019,type:"journal",title:"Analysis of hybrid state estimators: accuracy and convergence of estimator formulations",venue:"<em>IEEE Transactions on Power Systems</em>, vol. 34, no. 4, pp. 2565–2576, Jul. 2019",authors:"Z. Jin, P. Wall, Y. Chen, J. Yu, S. Chakrabarti, V. Terzija"},
+{y:2019,type:"journal",title:"SCADA and PMU measurement based methods for robust hybrid state estimation",venue:"<em>Electric Power Components and Systems</em>, vol. 47, no. 9–10, pp. 849–860, 2019",authors:"A. Dubey, S. Chakrabarti, V. Terzija"},
+{y:2019,type:"journal",title:"Networked microgrids: state-of-the-art and future perspectives",venue:"<em>IEEE Transactions on Industrial Informatics</em>, vol. 15, no. 3, pp. 1238–1250, March 2019",authors:"M. N. Alam, S. Chakrabarti, A. Ghosh"},
+{y:2019,type:"journal",title:"Distributed control based power sharing strategy for an islanded AC microgrid",venue:"<em>IET Generation, Transmission &amp; Distribution</em>, vol. 13, no. 4, pp. 553–562, 2019",authors:"N. Negi, S. R. Sahoo, S. Chakrabarti"},
+{y:2018,type:"journal",title:"Local measurement based technique for estimating fault location in multi-source DC microgrids",venue:"<em>IET Generation, Transmission &amp; Distribution</em>, vol. 12, no. 13, pp. 3305–3313, July 2018",authors:"A. Meghwani, S. C. Srivastava, S. Chakrabarti"},
+{y:2018,type:"journal",title:"Hierarchical parallel dynamic estimator of states for interconnected power system",venue:"<em>IET Generation, Transmission &amp; Distribution</em>, vol. 12, no. 10, pp. 2299–2306, May 2018",authors:"J. G. Sreenath, S. Chakrabarti, K. Rajawat"},
+{y:2018,type:"journal",title:"An educational software for enhancing research in power system state estimation",venue:"<em>Electric Power Components and Systems</em>, vol. 46, no. 7, pp. 802–813, 2018",authors:"S. K. Mallik, S. Chakrabarti, S. N. Singh"},
+{y:2018,type:"journal",title:"A robust decentralized wide area damping controller for wind generators and FACTS controllers considering load model uncertainties",venue:"<em>IEEE Transactions on Smart Grid</em>, vol. 9, no. 1, pp. 360–372, Jan. 2018",authors:"V. Vignesh, S. C. Srivastava, S. Chakrabarti"},
+{y:2017,type:"journal",title:"An extension of common information model for power system multi area state estimation",venue:"<em>IEEE Systems Journal</em>, vol. 11, no. 3, pp. 1692–1701, Sep. 2017",authors:"A. Sharma, S. C. Srivastava, S. Chakrabarti"},
+{y:2017,type:"journal",title:"A two-stage state estimator for dynamic monitoring of power systems",venue:"<em>IEEE Systems Journal</em>, vol. 11, no. 3, pp. 1767–1776, Sep. 2017",authors:"M. Asprou, S. Chakrabarti, E. Kyriakides"},
+{y:2017,type:"journal",title:"Voltage stability monitoring of power systems using reduced network and artificial neural network",venue:"<em>International Journal of Electrical Power and Energy Systems</em>, vol. 87, pp. 43–51, May 2017",authors:"S. M. Ashraf, A. Gupta, D. Choudhary, S. Chakrabarti"},
+{y:2017,type:"journal",title:"A non-unit protection scheme for DC microgrid based on local measurements",venue:"<em>IEEE Transactions on Power Delivery</em>, vol. 32, no. 1, pp. 172–181, Feb. 2017",authors:"A. Meghwani, S. C. Srivastava, S. Chakrabarti"},
+{y:2017,type:"journal",title:"A cubature Kalman filter based power system dynamic state estimator",venue:"<em>IEEE Transactions on Instrumentation and Measurement</em>, vol. 66, no. 8, pp. 2036–2045, Aug. 2017",authors:"A. Sharma, S. C. Srivastava, S. Chakrabarti"},
+{y:2016,type:"journal",title:"A multi-agent based dynamic state estimator for multi-area power system",venue:"<em>IET Generation, Transmission &amp; Distribution</em>, vol. 10, no. 3, pp. 131–141, 2016",authors:"A. Sharma, S. C. Srivastava, S. Chakrabarti"},
+{y:2016,type:"journal",title:"Testing and validation of power system dynamic state estimators using real time digital simulator (RTDS)",venue:"<em>IEEE Transactions on Power Systems</em>, vol. 31, no. 3, pp. 2338–2347, May 2016",authors:"A. Sharma, S. C. Srivastava, S. Chakrabarti"},
+{y:2016,type:"journal",title:"An iterative multi area state estimation approach using area slack bus adjustment",venue:"<em>IEEE Systems Journal</em>, vol. 10, no. 1, pp. 69–77, March 2016",authors:"A. Sharma, S. C. Srivastava, S. Chakrabarti"},
+{y:2015,type:"journal",title:"Power system load modelling under large and small disturbances using phasor measurement units data",venue:"<em>IET Generation, Transmission &amp; Distribution</em>, vol. 9, no. 12, pp. 1316–1323, 2015",authors:"V. Vignesh, S. Chakrabarti, S. C. Srivastava"},
+{y:2015,type:"journal",title:"Load modelling under unbalanced disturbances",venue:"<em>IEEE Transactions on Power Systems</em>, vol. 31, no. 2, pp. 1661–1662, 2015",authors:"V. Vignesh, S. Chakrabarti, S. C. Srivastava"},
+{y:2015,type:"journal",title:"A multi-agent based power system hybrid dynamic state estimator",venue:"<em>IEEE Intelligent Systems</em>, vol. 30, no. 3, pp. 52–59, May/June 2015",authors:"A. Sharma, S. C. Srivastava, S. Chakrabarti"},
+{y:2014,type:"journal",title:"A robust regularized hybrid state estimator for power systems",venue:"<em>Electric Power Components and Systems</em>, vol. 42, no. 7, pp. 671–681, April 2014",authors:"S. K. Mallik, S. Chakrabarti, S. N. Singh"},
+{y:2014,type:"journal",title:"Fast assessment of available transfer capability using synchrophasor measurements",venue:"<em>Electric Power Components and Systems</em>, vol. 42, no. 7, pp. 716–726, April 2014",authors:"Ch. V. V. S. B. Reddy, S. C. Srivastava, S. Chakrabarti"},
+{y:2014,type:"journal",title:"Uncertainty in transmission line parameters: estimation and impact on line current differential protection",venue:"<em>IEEE Transactions on Instrumentation and Measurement</em>, vol. 63, no. 6, pp. 1496–1504, June 2014",authors:"G. Sivanagaraju, S. Chakrabarti, S. C. Srivastava"},
+{y:2014,type:"journal",title:"A sensitivity based method for under-frequency load-shedding",venue:"<em>IEEE Transactions on Power Systems</em>, vol. 29, no. 2, pp. 984–985, March 2014",authors:"C. P. Reddy, S. Chakrabarti, S. C. Srivastava"},
+{y:2013,type:"journal",title:"Advanced battery storage control for an autonomous microgrid",venue:"<em>Electric Power Components and Systems</em>, vol. 41, no. 2, pp. 157–181, 2013",authors:"R. Majumder, S. Chakrabarti, G. Ledwich, A. Ghosh"},
+{y:2012,type:"journal",title:"Reconfiguration of power distribution systems considering reliability and power loss",venue:"<em>IEEE Transactions on Power Delivery</em>, vol. 27, no. 2, pp. 918–926, Apr. 2012",authors:"B. Amanulla, S. Chakrabarti, S. N. Singh"},
+{y:2011,type:"journal",title:"A constrained formulation for hybrid state estimation",venue:"<em>IEEE Transactions on Power Systems</em>, vol. 26, no. 3, pp. 1102–1109, Aug. 2011",authors:"G. Valverde, S. Chakrabarti, E. Kyriakides, V. Terzija"},
+{y:2010,type:"journal",title:"Inclusion of PMU current phasor measurements in a power system state estimator",venue:"<em>IET Generation, Transmission &amp; Distribution</em>, vol. 4, no. 10, pp. 1104–1115, Sep. 2010",authors:"S. Chakrabarti, E. Kyriakides, G. Ledwich, A. Ghosh"},
+{y:2010,type:"journal",title:"Droop control of converter interfaced microsources in rural distributed generation",venue:"<em>IEEE Transactions on Power Delivery</em>, vol. 25, no. 4, pp. 2768–2778, Oct. 2010",authors:"R. Majumder, G. Ledwich, A. Ghosh, S. Chakrabarti, F. Zare"},
+{y:2009,type:"journal",title:"Uncertainty in power system state variables obtained through synchronized measurements",venue:"<em>IEEE Transactions on Instrumentation and Measurement</em>, vol. 58, no. 8, pp. 2452–2458, Aug. 2009",authors:"S. Chakrabarti, E. Kyriakides, M. Albu"},
+{y:2009,type:"journal",title:"Static load modelling and voltage stability indices",venue:"<em>International Journal of Power and Energy Systems</em>, vol. 29, no. 3, pp. 178–185, 2009",authors:"S. Chakrabarti"},
+{y:2009,type:"journal",title:"PMU measurement uncertainty considerations in WLS state estimation",venue:"<em>IEEE Transactions on Power Systems</em>, vol. 24, no. 2, pp. 1062–1071, May 2009",authors:"S. Chakrabarti, E. Kyriakides"},
+{y:2009,type:"journal",title:"Measurements get together",venue:"<em>IEEE Power and Energy Magazine</em>, pp. 42–49, Jan./Feb. 2009",authors:"S. Chakrabarti, E. Kyriakides, T. Bi, D. Cai, V. Terzija"},
+{y:2009,type:"journal",title:"Placement of synchronized measurements for power system observability",venue:"<em>IEEE Transactions on Power Delivery</em>, vol. 24, no. 1, pp. 12–19, Jan. 2009",authors:"S. Chakrabarti, E. Kyriakides, D. G. Eliades"},
+{y:2008,type:"journal",title:"Generation rescheduling using ANN-based computation of parameter sensitivities of the voltage stability margin",venue:"<em>Engineering Applications of Artificial Intelligence</em>, vol. 21, pp. 1164–1169, 2008",authors:"S. Chakrabarti, B. Jeyasurya"},
+{y:2008,type:"journal",title:"Optimal placement of phasor measurement units for power system observability",venue:"<em>IEEE Transactions on Power Systems</em>, vol. 23, no. 3, pp. 1433–1440, Aug. 2008",authors:"S. Chakrabarti, E. Kyriakides"},
+{y:2008,type:"journal",title:"Voltage stability monitoring by artificial neural network using a regression-based feature selection method",venue:"<em>Expert Systems with Applications</em>, vol. 35, pp. 1802–1808, 2008",authors:"S. Chakrabarti"},
+{y:2008,type:"journal",title:"Multicontingency voltage stability monitoring of a power system using an adaptive failure prediction network",venue:"<em>International Journal of Electric Power and Energy Systems</em>, vol. 30, no. 1, pp. 1–7, Jan. 2008",authors:"S. Chakrabarti, B. Jeyasurya"},
+{y:2007,type:"journal",title:"An enhanced radial basis function network for voltage stability monitoring considering multiple contingencies",venue:"<em>Electric Power Systems Research</em>, vol. 77, no. 7, pp. 780–787, May 2007",authors:"S. Chakrabarti, B. Jeyasurya"},
+// CONFERENCES (108)
+{y:2026,type:"conference",title:"Bilateral event-triggered adaptive state estimator for demand response enabled distribution systems",venue:"<em>Proc. Power Systems Computation Conf. (PSCC 2026)</em>, Cyprus, 2026",authors:"S. Chatterjee, S. Chakrabarti, A. Mohapatra"},
+{y:2025,type:"conference",title:"Optimal allocation of EVCS with energy loss cost allocation and power-quality considerations",venue:"<em>Proc. 6th Int. Conf. Electric Power and Renewable Energy (EPREC-2026)</em>, Bhilai, India, Jan. 2025",authors:"A. Bhattacharya, S. Banerjee, S. Chakrabarti"},
+{y:2025,type:"conference",title:"A methodology for state update of unbalanced boundary buses in transmission systems",venue:"<em>Proc. 2025 IEEE Int. Conf. Energy Technologies for Future Grids</em>, Wollongong, Australia, Dec. 2025",authors:"N. K. Sharma, S. Chakrabarti, A. Sharma"},
+{y:2025,type:"conference",title:"Hardware in loop validation for DFIG control under normal and abnormal grid conditions",venue:"<em>Proc. 2025 IEEE Int. Conf. Energy Technologies for Future Grids</em>, Wollongong, Australia, Dec. 2025",authors:"J. K. Mahawar, G. M. Vishwanath, S. Chakrabarti"},
+{y:2024,type:"conference",title:"Transient stability enhancement of a synchronous generator using DFIG considering its LVRT capability",venue:"<em>Proc. 2024 IEEE Int. Conf. Power Electronics, Drives and Energy Systems (PEDES)</em>, India, 2024",authors:"J. K. Mahawar, G. M. Vishwanath, S. Chakrabarti"},
+{y:2024,type:"conference",title:"Conditions for failure of numerical estimation of decaying DC component in fault current",venue:"<em>Proc. National Power Systems Conference (NPSC 2024)</em>, New Delhi, India, Dec. 2024",authors:"B. R. Kumar, A. Mohapatra, S. Chakrabarti"},
+{y:2023,type:"conference",title:"Controller hardware in loop validation of phasor-domain algorithms for high-speed protection of power networks",venue:"<em>Proc. Int. Conf. Power Systems (ICPS 2023)</em>, Bangladesh, 2023",authors:"B. R. Kumar, A. Mohapatra, S. Chakrabarti"},
+{y:2023,type:"conference",title:"LVRT capability enhancement of doubly-fed induction generator using multi-stage control",venue:"<em>Proc. Int. Conf. Power Systems (ICPS 2023)</em>, Bangladesh, 2023",authors:"J. K. Mahawar, S. Chakrabarti, G. M. Vishwanath"},
+{y:2023,type:"conference",title:"Neural network based fault location in power distribution system",venue:"<em>Proc. IEEE PES ISGT Asia 2023</em>, 2023",authors:"V. Patel, S. Ghosh, S. Chakrabarti, A. Sharma, S. Pannala"},
+{y:2022,type:"conference",title:"Comprehensive demonstration of man-in-the-middle attack in PDC and PMU network",venue:"<em>Proc. National Power Systems Conference (NPSC 2022)</em>, New Delhi, India, Dec. 2022",authors:"K. P. Swain, A. Tiwari, A. Sharma, A. Karkare, S. Chakrabarti"},
+{y:2022,type:"conference",title:"Key insights on methods for estimation of decaying DC component in fault currents",venue:"<em>Proc. National Power Systems Conference (NPSC 2022)</em>, New Delhi, India, Dec. 2022",authors:"B. R. Kumar, A. Mohapatra, S. Chakrabarti"},
+{y:2022,type:"conference",title:"State estimation of the transmission system in the presence of unbalanced load at the T-D boundary",venue:"<em>Proc. National Power Systems Conference (NPSC 2022)</em>, New Delhi, India, Dec. 2022",authors:"N. K. Sharma, S. Chakrabarti, A. Sharma"},
+{y:2022,type:"conference",title:"An impact study of time of use pricing on voltage control devices",venue:"<em>Proc. National Power Systems Conference (NPSC 2022)</em>, New Delhi, India, Dec. 2022",authors:"C. L. Dewangan, M. Satapathy, S. Chakrabarti, S. N. Singh"},
+{y:2022,type:"conference",title:"Real time detection and control of loss of synchronism using energy function criterion and phase sequence exchange technique",venue:"<em>Proc. IEEE PES ISGT Asia 2022</em>, Singapore, Nov. 2022",authors:"N. Singh, S. Chakrabarti, A. Sharma"},
+{y:2022,type:"conference",title:"Locating faulty section in tie-line using classification based methods",venue:"<em>Proc. IEEE PES ISGT Asia 2022</em>, Singapore, Nov. 2022",authors:"V. S. Patel, A. Kapoor, A. Sharma, S. Chakrabarti"},
+{y:2022,type:"conference",title:"DPMU-based event classification in microgrids using time domain and spectral features of limited measurements",venue:"<em>Proc. 2022 IEEE Power &amp; Energy Society General Meeting (PESGM)</em>, Denver, USA, Jul. 2022",authors:"S. Som, R. Dutta, A. Mitra, S. Chakrabarti, S. R. Sahoo"},
+{y:2021,type:"conference",title:"Grid-forming control for solar PV systems with real-time MPP estimation",venue:"<em>Proc. 2021 IEEE Power &amp; Energy Society General Meeting (PESGM)</em>, Jul. 2021",authors:"B. Pawar, E. I. Batzelis, S. Chakrabarti, B. C. Pal"},
+{y:2021,type:"conference",title:"Phasor estimation and disturbance detection in power systems by Ramanujan sum",venue:"<em>Proc. 2021 IEEE Power &amp; Energy Society General Meeting (PESGM)</em>, Jul. 2021",authors:"B. R. Kumar, A. Mohapatra, S. Chakrabarti"},
+{y:2020,type:"conference",title:"Protection coordination with high penetration of solar power to distribution networks",venue:"<em>Proc. 2nd Int. Conf. Smart Power and Internet Energy Systems (SPIES 2020)</em>, Bangkok, Thailand, Sep. 2020",authors:"M. N. Alam, S. Chakrabarti, V. K. Tiwari"},
+{y:2020,type:"conference",title:"An iterated augmented covariance matrix based dynamic state estimation",venue:"<em>Proc. 2020 IEEE Power &amp; Energy Society General Meeting (PESGM)</em>, Montreal, Canada, Aug. 2020",authors:"A. Mitra, R. Dutta, A. Mohapatra, S. Chakrabarti"},
+{y:2020,type:"conference",title:"Optimal day-ahead load scheduling for voltage and frequency regulation in an islanded microgrid",venue:"<em>Proc. 2020 IEEE Power &amp; Energy Society General Meeting (PESGM)</em>, Montreal, Canada, Aug. 2020",authors:"G. Garg, A. Mohapatra, S. Chakrabarti, A. Kumar, R. K. Panda"},
+{y:2020,type:"conference",title:"Secondary control method for standalone DC microgrid with improved voltage regulation, load sharing, and line loss",venue:"<em>Proc. 2020 IEEE Power &amp; Energy Society General Meeting (PESGM)</em>, Montreal, Canada, Aug. 2020",authors:"R. K. Yadav, S. De, S. R. Sahoo, S. Chakrabarti"},
+{y:2020,type:"conference",title:"Event detection and localization in active distribution networks using µPMUs",venue:"<em>Proc. 2020 IEEE Power &amp; Energy Society General Meeting (PESGM)</em>, Montreal, Canada, Aug. 2020",authors:"R. Dutta, S. Som, S. Chakrabarti, A. Sharma, A. Srivastava"},
+{y:2019,type:"conference",title:"Parameter and topology estimation for electrical power distribution system",venue:"<em>Proc. 8th Int. Conf. Power Systems (ICPS 2019)</em>, Jaipur, India, Dec. 2019",authors:"A. Khan, A. Sharma, S. Chakrabarti"},
+{y:2019,type:"conference",title:"Automatic power factor controller in low voltage residential distribution system with high solar power generation",venue:"<em>Proc. 9th Int. Conf. Power and Energy Systems (ICPES)</em>, Perth, Australia, Dec. 2019",authors:"C. L. Dewangan, S. Chakrabarti, S. N. Singh, V. Vijayan"},
+{y:2019,type:"conference",title:"Parameter estimation of a synchronous generator at moderate measurement sampling rate",venue:"<em>Proc. ISGT Europe 2019</em>, Bucharest, Romania, Sep. 2019",authors:"A. Mitra, S. Chakrabarti, A. Mohapatra"},
+{y:2019,type:"conference",title:"Droop based secondary controller for islanded DC microgrid with line loss minimization",venue:"<em>Proc. ISGT Europe 2019</em>, Bucharest, Romania, Sep. 2019",authors:"R. Yadav, S. Dey, S. R. Sahoo, S. Chakrabarti"},
+{y:2019,type:"conference",title:"An analytical approach for phase balancing considering customer load profile",venue:"<em>Proc. ISGT Europe 2019</em>, Bucharest, Romania, Sep. 2019",authors:"P. Gangwar, S. N. Singh, S. Chakrabarti"},
+{y:2019,type:"conference",title:"Optimal residential battery scheduling using short-term forecasts",venue:"<em>Proc. ISGT Europe 2019</em>, Bucharest, Romania, Sep. 2019",authors:"S. Sahoo, A. Sharma, S. Chakrabarti"},
+{y:2019,type:"conference",title:"Impact of GPS spoofing on synchrophasor assisted load shedding",venue:"<em>Proc. IEEE PES General Meeting</em>, Atlanta, USA, Aug. 2019",authors:"J. G. Sreenath, A. Meghwani, S. Chakrabarti, S. C. Srivastava, A. Sharma"},
+{y:2019,type:"conference",title:"An adaptive protection scheme for AC microgrids using micro PMU based topology processor",venue:"<em>Proc. 2019 Int. Conf. Environment and Electrical Engineering</em>, Genoa, Italy, Jun. 2019",authors:"M. N. Alam, S. Chakrabarti, A. Sharma, S. C. Srivastava"},
+{y:2018,type:"conference",title:"Comparative performance analysis of optimization based distribution system state estimator with varying measurement uncertainties",venue:"<em>Proc. 2018 National Power System Conference</em>, Trichy, India, Dec. 2018",authors:"R. Dutta, A. Dubey, S. Chakrabarti, A. Sharma"},
+{y:2018,type:"conference",title:"Performance evaluation of 5kWp grid connected polycrystalline Si based photovoltaic plant",venue:"<em>Proc. 2018 National Power System Conference</em>, Trichy, India, Dec. 2018",authors:"S. Inamdar, S. K. Singh, A. Sharma, S. Chakrabarti"},
+{y:2018,type:"conference",title:"Wavelet transform based PQ event localization scheme for benchmark LVAC microgrid",venue:"<em>Proc. 2018 National Power System Conference</em>, Trichy, India, Dec. 2018",authors:"S. Som, S. Chakrabarti, S. R. Sahoo"},
+{y:2018,type:"conference",title:"Effect of solar generation on load consumption pattern and load forecasting using statistical R programming",venue:"<em>Proc. Intelligent Computing Techniques for Smart Energy Systems</em>, Jaipur, India, Dec. 2018",authors:"S. K. Singh, H. V. Singh, S. Chakrabarti, S. N. Singh"},
+{y:2018,type:"conference",title:"Short term load forecasting using SVM models: a case study",venue:"<em>Proc. 8th IEEE Power India Int. Conf.</em>, Kurukshetra, India, Dec. 2018",authors:"R. Khan, C. Dewangan, S. C. Srivastava, S. Chakrabarti"},
+{y:2018,type:"conference",title:"Real-time implementation of synchrophasor based linear state estimator in OPAL-RT HYPERSIM",venue:"<em>Proc. ICUE 2018 on Green Energy for Sustainable Development</em>, Phuket, Thailand, Oct. 2018",authors:"A. Dubey, S. Chakrabarti, A. Sharma"},
+{y:2018,type:"conference",title:"Development of an R&D platform for smart city projects in the Indian context",venue:"<em>Proc. CIGRE 2018 Session</em>, Paris, France, Aug. 2018",authors:"S. Sahoo et al."},
+{y:2018,type:"conference",title:"Impact of GPS spoofing on synchrophasor assisted load shedding",venue:"<em>Proc. IEEE PES General Meeting</em>, Portland, USA, Aug. 2018",authors:"J. G. Sreenath, S. Mangalwedekar, A. Meghwani, S. Chakrabarti, K. Rajawat, S. C. Srivastava"},
+{y:2017,type:"conference",title:"Solar irradiance forecasting using adaptive wavelet neural network",venue:"<em>Proc. IEEE PES APPEEC 2017</em>, Bangalore, India, Nov. 2017",authors:"C. L. Dewangan, S. N. Singh, S. Chakrabarti"},
+{y:2017,type:"conference",title:"Estimation and utilization of aggregate harmonic load model",venue:"<em>Proc. IEEE PES APPEEC 2017</em>, Bangalore, India, Nov. 2017",authors:"S. Athiappan, S. Anand, S. Chakrabarti"},
+{y:2017,type:"conference",title:"Analysis of fault characteristics in DC microgrids for various converter topologies",venue:"<em>Proc. ISGT Asia 2017</em>, Auckland, New Zealand, Dec. 2017",authors:"A. Meghwani, S. Chakrabarti, S. C. Srivastava, S. Anand"},
+{y:2017,type:"conference",title:"An exhaustive search based topology error detection method and its validation in real time digital simulator",venue:"<em>Proc. 2017 IEEE TENCON</em>, Penang, Malaysia, Nov. 2017",authors:"A. Srivastava, A. Dubey, S. Chakrabarti"},
+{y:2017,type:"conference",title:"Network reconfiguration for unbalanced distribution systems",venue:"<em>Proc. 2017 IEEE TENCON</em>, Penang, Malaysia, Nov. 2017",authors:"P. Gangwar, S. N. Singh, S. Chakrabarti"},
+{y:2017,type:"conference",title:"A Hopfield neural network based reconfiguration algorithm for power distribution systems",venue:"<em>Proc. 2017 IEEE Region 10 Symposium (TENSYMP)</em>, Cochin, India, Jul. 2017",authors:"V. Patel, S. Chakrabarti, S. N. Singh"},
+{y:2017,type:"conference",title:"Testing and validation of a dynamic estimator of states in OPAL-RT real time simulator",venue:"<em>Proc. 2017 IEEE PES General Meeting</em>, Chicago, USA, Jul. 2017",authors:"A. Dubey, S. Chakrabarti, V. Terzija"},
+{y:2017,type:"conference",title:"A recursive state estimation approach to mitigate false data injection attacks in power systems",venue:"<em>Proc. 2017 IEEE PES General Meeting</em>, Chicago, USA, Jul. 2017",authors:"J. G. Sreenath, A. Meghwani, S. Chakrabarti, K. Rajawat, S. C. Srivastava"},
+{y:2017,type:"conference",title:"Synchrophasor based three-phase state estimator",venue:"<em>Proc. Int. Conf. Sustainable and Renewable Energy Development and Design</em>, Thimphu, Bhutan, Apr. 2017",authors:"A. Dubey, S. Chakrabarti"},
+{y:2016,type:"conference",title:"Reduced network based voltage stability monitoring by using PMU measurements",venue:"<em>Proc. IEEE TENCON 2016</em>, Singapore, Nov. 2016",authors:"C. V. V. S. B. Reddy, S. Chakrabarti, S. C. Srivastava"},
+{y:2016,type:"conference",title:"Frequency response improvement in microgrid using optimized VSG control",venue:"<em>Proc. 2016 National Power System Conference</em>, Bhubaneswar, India, Dec. 2016",authors:"B. Rathore, S. Chakrabarti, S. Anand"},
+{y:2016,type:"conference",title:"Improving reliability and quality of supply (QoS) in smart distribution network",venue:"<em>Proc. 2016 National Power System Conference</em>, Bhubaneswar, India, Dec. 2016",authors:"P. K. Gupta, R. Martins, S. Chakrabarti, A. D. Remanidevi, K. Maki, B. Schatz, M. V. Ramesh, S. N. Singh"},
+{y:2016,type:"conference",title:"A fast scheme for fault detection in DC microgrid based on voltage prediction",venue:"<em>Proc. 2016 National Power System Conference</em>, Bhubaneswar, India, Dec. 2016",authors:"A. Meghwani, S. Chakrabarti, S. C. Srivastava"},
+{y:2016,type:"conference",title:"A recursive formulation of the Prony method for monitoring power system oscillations",venue:"<em>Proc. 6th IEEE Int. Conf. Power Systems (ICPS 2016)</em>, Mar. 2016",authors:"P. Porwal, S. Chakrabarti, N. Verma"},
+{y:2016,type:"conference",title:"Robust adaptive primary control for an islanded two-bus distributed generation system",venue:"<em>Proc. 6th IEEE Int. Conf. Power Systems (ICPS 2016)</em>, Mar. 2016",authors:"N. Negi, S. R. Sahoo, S. Chakrabarti"},
+{y:2016,type:"conference",title:"An unscented Kalman filter based hybrid state estimator considering conventional and PMU measurements",venue:"<em>Proc. 6th IEEE Int. Conf. Power Systems (ICPS 2016)</em>, Mar. 2016",authors:"A. Dubey, S. Chakrabarti"},
+{y:2015,type:"conference",title:"Implementation of Rauch-Tung-Striebel smoother for power system dynamic state estimation in the presence of PMU measurements",venue:"<em>Proc. IEEE PES ISGT Asia 2015</em>, Bangkok, Thailand, Nov. 2015",authors:"J. G. Sreenath, S. Chakrabarti, A. Sharma"},
+{y:2015,type:"conference",title:"Observability analysis of power systems in the presence of hybrid measurements",venue:"<em>Proc. 2015 Electrical Power and Energy Conf.</em>, London, Ontario, Canada, Oct. 2015",authors:"N. K. Sharma, S. Chakrabarti, B. Jeyasurya"},
+{y:2015,type:"conference",title:"An optimization based method for topology error detection for state estimation",venue:"<em>Proc. IEEE PES ISGT Asia 2015</em>, Bangkok, Thailand, Nov. 2015",authors:"N. K. Sharma, S. Chakrabarti"},
+{y:2015,type:"conference",title:"Voltage stability monitoring using reduced network and measurement transformation",venue:"<em>Proc. 25th Australasian Universities Power Engineering Conference (AUPEC 2015)</em>, Wollongong, Australia, Sep. 2015",authors:"S. M. Ashraf, S. Chakrabarti"},
+{y:2015,type:"conference",title:"Estimation of the rotor angle of a synchronous generator by using PMU measurements",venue:"<em>Proc. 2015 IEEE PowerTech</em>, Eindhoven, Netherlands, 2015",authors:"M. Jha, S. Chakrabarti, E. Kyriakides"},
+{y:2015,type:"conference",title:"A new protection scheme for DC microgrid using line current derivative",venue:"<em>Proc. 2015 IEEE PES General Meeting</em>, Denver, Colorado, USA, 2015",authors:"A. Meghwani, S. C. Srivastava, S. Chakrabarti"},
+{y:2015,type:"conference",title:"Classification and modelling of loads in power systems using SVM and optimization approach",venue:"<em>Proc. 2015 IEEE PES General Meeting</em>, Denver, Colorado, USA, 2015",authors:"V. Vignesh, S. Chakrabarti, S. C. Srivastava"},
+{y:2014,type:"conference",title:"An investigation on the numerical ill-conditioning of hybrid state estimators",venue:"<em>Proc. 18th National Power Systems Conf. (NPSC 2014)</em>, Guwahati, India, Dec. 2014",authors:"S. K. Mallik, S. Chakrabarti, S. N. Singh"},
+{y:2014,type:"conference",title:"Development of dynamic test cases in OPAL-RT real-time power system simulator",venue:"<em>Proc. 18th National Power Systems Conf. (NPSC 2014)</em>, Guwahati, India, Dec. 2014",authors:"S. Singh, B. Padhy, S. Chakrabarti, S. N. Singh, A. Kolwalkar, S. Kelapure"},
+{y:2014,type:"conference",title:"Performance analysis of static network reduction methods commonly used in power systems",venue:"<em>Proc. 18th National Power Systems Conf. (NPSC 2014)</em>, Guwahati, India, Dec. 2014",authors:"S. Ashraf, B. Rathore, S. Chakrabarti"},
+{y:2014,type:"conference",title:"Power system stability monitoring using synchronized phasor measurements",venue:"<em>Proc. 14th Electrical Power and Energy Conf.</em>, Calgary, Canada, 2014",authors:"S. Chakrabarti, B. Jeyasurya"},
+{y:2014,type:"conference",title:"Multi area state estimation for smart grid application utilizing all SCADA and PMU measurements",venue:"<em>Proc. 2014 IEEE Innovative Smart Grid Technologies Conf. Asia (ISGT Asia)</em>, Kuala Lumpur, Malaysia, Mar. 2014",authors:"A. Sharma, S. C. Srivastava, S. Chakrabarti"},
+{y:2014,type:"conference",title:"Comparing performance of Prony analysis and matrix pencil method for monitoring power system oscillations",venue:"<em>Proc. ISGT Asia 2014</em>, Kuala Lumpur, Malaysia, Mar. 2014",authors:"S. Chitturi, S. Chakrabarti, S. N. Singh"},
+{y:2014,type:"conference",title:"The use of a PMU-based state estimator for tracking power system dynamics",venue:"<em>Proc. 2014 IEEE PES General Meeting</em>, Washington, DC, USA, Jul. 2014",authors:"M. Asprou, E. Kyriakides, S. Chakrabarti"},
+{y:2014,type:"conference",title:"An experimental study on the load modelling using PMU measurements",venue:"<em>Proc. 2014 IEEE PES Transmission &amp; Distribution Conf. &amp; Exposition</em>, Chicago, IL, USA, Apr. 2014",authors:"V. Vignesh, S. Chakrabarti, S. C. Srivastava"},
+{y:2013,type:"conference",title:"Review of load frequency control methods: Part I – introduction and pre-deregulation scenario",venue:"<em>Proc. Int. Conf. Control, Automation, Robotics and Embedded Systems (CARE)</em>, Jabalpur, India, Dec. 2013",authors:"S. K. Jain, S. Chakrabarti, S. N. Singh"},
+{y:2013,type:"conference",title:"Review of load frequency control methods: Part II – post-deregulation scenario and case studies",venue:"<em>Proc. Int. Conf. Control, Automation, Robotics and Embedded Systems (CARE)</em>, Jabalpur, India, Dec. 2013",authors:"S. K. Jain, S. Chakrabarti, S. N. Singh"},
+{y:2013,type:"conference",title:"Power system state estimation considering real-time equivalents of the external networks",venue:"<em>Proc. IEEE Innovative Smart Grid Technologies Conf.</em>, Bangalore, India, Nov. 2013",authors:"K. Dongare, S. Chakrabarti, E. Kyriakides"},
+{y:2013,type:"conference",title:"Performance study of a regularized method for solving non-converging power system state estimation problems",venue:"<em>Proc. 5th Int. Conf. Power &amp; Energy Systems</em>, Kathmandu, Nepal, Oct. 2013",authors:"S. K. Mallik, S. Handa, S. Chakrabarti, S. N. Singh"},
+{y:2013,type:"conference",title:"Transformation of measurements for using external network equivalents in state estimation",venue:"<em>Proc. IEEE PES General Meeting</em>, Vancouver, Canada, Jul. 2013",authors:"M. Vardikar, S. Chakrabarti, E. Kyriakides"},
+{y:2013,type:"conference",title:"Multi area state estimation using area slack bus angle adjustment with minimal data exchange",venue:"<em>Proc. IEEE PES General Meeting</em>, Vancouver, Canada, Jul. 2013",authors:"A. Sharma, S. C. Srivastava, S. Chakrabarti"},
+{y:2013,type:"conference",title:"Multi-criteria PMU placement for observability analysis of power systems",venue:"<em>Proc. IASTED Int. Conf. Power and Energy Systems (AsiaPES 2013)</em>, Phuket, Thailand, Apr. 2013",authors:"N. K. Meena, S. Chakrabarti"},
+{y:2012,type:"conference",title:"An improved static voltage stability index using synchrophasor measurements for early detection of impending voltage instability",venue:"<em>Proc. 17th National Power Systems Conf.</em>, Varanasi, India, Dec. 2012",authors:"C. V. V. S. B. Reddy, S. C. Srivastava, S. Chakrabarti"},
+{y:2012,type:"conference",title:"Synchrophasor based power system monitoring and control using real time digital simulation facility",venue:"<em>Proc. 17th National Power Systems Conf.</em>, Varanasi, India, Dec. 2012",authors:"A. Sharma et al."},
+{y:2012,type:"conference",title:"A regularized method for solving ill-conditioned hybrid state estimation problem",venue:"<em>Proc. 2nd Int. Conf. Power, Control, and Embedded Systems</em>, Allahabad, India, Dec. 2012",authors:"S. K. Mallik, S. Chakrabarti, S. N. Singh"},
+{y:2012,type:"conference",title:"A hybrid energy system for a household in northern part of India",venue:"<em>Proc. 3rd IEEE Int. Conf. Sustainable Energy Technologies</em>, Kathmandu, Nepal, Sep. 2012",authors:"N. Agarwal, S. Chakrabarti"},
+{y:2011,type:"conference",title:"ANN-based hybrid state estimation and enhanced visualization of power systems",venue:"<em>Proc. Innovative Smart Grid Technologies (ISGT)-India 2011</em>, Kerala, India, Dec. 2011",authors:"A. Kumar, S. Chakrabarti"},
+{y:2011,type:"conference",title:"Optimal placement of phasor measurement units for multi-area observability",venue:"<em>Proc. Innovative Smart Grid Technologies (ISGT)-India 2011</em>, Kerala, India, Dec. 2011",authors:"B. Mallick, S. Chakrabarti"},
+{y:2011,type:"conference",title:"Improving the convergence characteristic of hybrid state estimation using pseudo measurement",venue:"<em>Proc. 17th Power System Computation Conf.</em>, Stockholm, Sweden, Aug. 2011",authors:"S. K. Mallik, S. Chakrabarti, S. N. Singh"},
+{y:2011,type:"conference",title:"Reconfiguration of distribution systems using probabilistic reliability models",venue:"<em>Proc. IEEE PES General Meeting</em>, Detroit, USA, Jul. 2011",authors:"B. Amanulla, S. Chakrabarti, S. N. Singh"},
+{y:2011,type:"conference",title:"Control of battery storage to improve voltage profile in autonomous microgrid",venue:"<em>Proc. IEEE PES General Meeting</em>, Detroit, USA, Jul. 2011",authors:"R. Majumder, S. Chakrabarti, G. Ledwich, A. Ghosh"},
+{y:2011,type:"conference",title:"Performance of electronic interfaced DERs integrated with communication network",venue:"<em>Proc. IEEE PES General Meeting</em>, Detroit, USA, Jul. 2011",authors:"R. Majumder, G. Bag, S. Chakrabarti"},
+{y:2010,type:"conference",title:"An ANN based hybrid state estimator",venue:"<em>Proc. 16th National Power Systems Conf.</em>, Hyderabad, India, Dec. 2010",authors:"A. Kumar, S. Chakrabarti"},
+{y:2010,type:"conference",title:"A comparative study of the methods of inclusion of PMU current phasor measurements in a hybrid state estimator",venue:"<em>Proc. IEEE PES General Meeting</em>, Minneapolis, USA, Jul. 2010",authors:"S. Chakrabarti, E. Kyriakides, G. Ledwich, A. Ghosh"},
+{y:2010,type:"conference",title:"Improved power sharing among distributed generators using web based communication",venue:"<em>Proc. IEEE PES General Meeting</em>, Minneapolis, USA, Jul. 2010",authors:"R. Majumder, A. Ghosh, S. Chakrabarti"},
+{y:2009,type:"conference",title:"Reliability driven reconfiguration of rural power distribution systems",venue:"<em>Proc. Int. Conf. Power Systems (ICPS)</em>, India, Dec. 2009",authors:"S. Chakrabarti, G. Ledwich, A. Ghosh"},
+{y:2009,type:"conference",title:"State estimation including synchronized measurements",venue:"<em>Proc. PowerTech Conf.</em>, Bucharest, Romania, 2009",authors:"S. Chakrabarti, E. Kyriakides, G. Valverde, V. Terzija"},
+{y:2008,type:"conference",title:"PMU placement for power system observability using binary particle swarm optimization",venue:"<em>Proc. Australasian Universities Power Engineering Conf. (AUPEC 2008)</em>, Sydney, Australia, Dec. 2008",authors:"S. Chakrabarti, G. K. Venayagamoorthy, E. Kyriakides"},
+{y:2008,type:"conference",title:"Cost-energy analysis and optimization of a hybrid energy system for a residence in Cyprus",venue:"<em>Proc. Int. Conf. Deregulated Electricity Market Issues in South-Eastern Europe (DEMSEE 2008)</em>, Nicosia, Cyprus, Sep. 2008",authors:"S. Chakrabarti, E. Kyriakides"},
+{y:2007,type:"conference",title:"Placement of phasor measurement units for state estimation with voltage stability considerations",venue:"<em>Proc. Australasian Universities Power Engineering Conf. (AUPEC 2007)</em>, Perth, Australia, Dec. 2007",authors:"S. Chakrabarti, E. Kyriakides"},
+{y:2007,type:"conference",title:"Formulation of the PMU placement problem in an integer quadratic programming framework",venue:"<em>Proc. Int. Conf. Power Systems (ICPS 2007)</em>, Bangalore, India, Dec. 2007",authors:"S. Chakrabarti, E. Kyriakides"},
+{y:2007,type:"conference",title:"Measurement uncertainty considerations in optimal sensor deployment for state estimation",venue:"<em>Proc. IEEE Symposium on Intelligent Signal Processing (WISP 2007)</em>, Madrid, Spain, Oct. 2007",authors:"S. Chakrabarti, D. Eliades, E. Kyriakides, M. Albu"},
+{y:2007,type:"conference",title:"Grid-connected hybrid energy system for a typical home in Cyprus",venue:"<em>Proc. Renewable Energy Sources and Energy Efficiency Conf.</em>, Nicosia, Cyprus, Sep. 2007",authors:"S. Chakrabarti, E. Kyriakides"},
+{y:2007,type:"conference",title:"Optimal placement of phasor measurement units for state estimation",venue:"<em>Proc. 7th IASTED Int. Conf. Power and Energy Systems (EuroPES 2007)</em>, Spain, Aug. 2007",authors:"S. Chakrabarti, E. Kyriakides"},
+{y:2006,type:"conference",title:"Sensitivity-based generation rescheduling for multi-contingency voltage stability",venue:"<em>Proc. IEEE PES 2006 General Meeting</em>, Quebec, Canada, Jun. 2006",authors:"S. Chakrabarti, B. Jeyasurya"},
+{y:2005,type:"conference",title:"Multicontingency voltage stability monitoring of power systems using radial basis function network",venue:"<em>Proc. 13th Int. Conf. Intelligent Systems Application to Power Systems</em>, Washington DC, USA, Nov. 2005",authors:"S. Chakrabarti, B. Jeyasurya"},
+{y:2005,type:"conference",title:"Sensitivity-based generation rescheduling for voltage stability enhancement",venue:"<em>Proc. IEEE PES General Meeting</em>, San Francisco, CA, USA, Jun. 2005",authors:"S. Chakrabarti, B. Jeyasurya"},
+{y:2004,type:"conference",title:"Blackout 2003: A case study on power system security",venue:"<em>Proc. IEEE NECEC Conf.</em>, St. John's, Canada, 2004",authors:"B. Jeyasurya, S. Chakrabarti"},
+{y:2004,type:"conference",title:"Effect of load modeling on the performance of power system voltage stability indices",venue:"<em>Proc. IEEE NECEC Conf.</em>, St. John's, Canada, 2004",authors:"S. Chakrabarti, B. Jeyasurya"},
+{y:2004,type:"conference",title:"On-line voltage stability monitoring using artificial neural network",venue:"<em>Proc. Large Engineering Systems Conf. on Power Engineering</em>, Halifax, Canada, Jul. 2004",authors:"S. Chakrabarti, B. Jeyasurya"},
+{y:2001,type:"conference",title:"A new computer controlled multi-channel high voltage supply system for GRACE instrumentation",venue:"<em>Proc. Int. Symposium on Gamma Ray Astrophysics Through Multiwavelength Experiments (GAME-2001)</em>, Mount Abu, India, Mar. 2001",authors:"A. Manna, S. Chakrabarti"},
+{y:2001,type:"conference",title:"Computer controlled multi-channel high voltage supply system for GRACE instrumentation",venue:"<em>Proc. Symposium on Intelligent Nuclear Instrumentation</em>, Mumbai, India, 2001",authors:"A. Manna, S. Chakrabarti, P. K. Mukherjee"},
+{y:2000,type:"conference",title:"Comparative study of three types of voltage stability indices",venue:"<em>Proc. National Power System Conf.</em>, Bangalore, India, Dec. 2000",authors:"S. Chakrabarti, S. K. Goswami, S. Paul"}
+];
+
+let activeType = 'all';
+let searchQuery = '';
+
+function setTab(el) {
+  activeType = el.dataset.type;
+  document.querySelectorAll('.pub-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  renderPubs();
+}
+
+function filterPubs() {
+  searchQuery = document.getElementById('pubSearch').value.toLowerCase();
+  renderPubs();
+}
+
+function renderPubs() {
+  const list = document.getElementById('pub-list');
+  const filtered = PUBS.filter(p => {
+    if (activeType !== 'all' && p.type !== activeType) return false;
+    if (searchQuery) {
+      const hay = (p.title + ' ' + p.authors + ' ' + p.venue).toLowerCase();
+      if (!hay.includes(searchQuery)) return false;
+    }
+    return true;
+  });
+  filtered.sort((a,b) => b.y - a.y);
+  if (filtered.length === 0) {
+    list.innerHTML = '<li class="pub-empty">No publications match your search.</li>';
+  } else {
+    list.innerHTML = filtered.map(p => `
+      <li class="pub-item">
+        <span class="pub-year-badge">${p.y}</span>
+        <div class="pub-details">
+          <h4>${p.title}</h4>
+          <p class="pub-venue">${p.venue}</p>
+          <p class="pub-authors">${p.authors}</p>
+        </div>
+      </li>`).join('');
   }
+}
+
+// Nav toggle
+document.querySelector('.nav-toggle').addEventListener('click', function() {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+// Initial render
+renderPubs();
 </script>
 </body>
 </html>
